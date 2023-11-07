@@ -23,23 +23,24 @@ import java.util.Scanner;
 public class Task3 {
     public static void main(String[] args) {
 
-      primer(4, 9, 2, 8);
+        int resPrim = primer(4, 9, 2, 8);
+        System.out.println("Результат выражения: " + resPrim);
 
-      checkSum(7, 9);
+        checkSum(7, 9);
 
-      checkNum(-7);
+        checkNum(-7);
 
-      negativeCheck(8);
+        boolean negCh = negativeCheck(8);
+        System.out.println(negCh);
 
-      sayName();
+        sayName();
 
-      yearCheck();
+        yearCheck();
 
     }
 
-    public static void primer (int a, int b, int c, int d) {
-        int resPrim = a * ( b + ( c * d ));
-        System.out.println("Результат выражения: " + resPrim);
+    public static int primer (int a, int b, int c, int d) {
+        return a * ( b + ( c * d ));
     }
 
     public static void checkSum (int a, int b){
@@ -52,16 +53,13 @@ public class Task3 {
     public static void checkNum (int a){
         if (a<0) {
             System.out.println("Число отрицательное");
-        }
-        else {
+        } else {
             System.out.println("Число положительное");
         }
     }
 
-    public static void negativeCheck (int a){
-        boolean negCh = (a<0);
-
-        System.out.println(negCh);
+    public static boolean negativeCheck (int a){
+        return (a<0);
 
     }
 
@@ -80,10 +78,11 @@ public class Task3 {
         System.out.print("Введите год: ");
         int year = scan.nextInt();
 
-        if ((year % 4 == 0) && !(year % 100 == 0) || (year % 400 == 0)) {
+        boolean yearCh = ((year % 4 == 0) && !(year % 100 == 0) || (year % 400 == 0));
+
+        if (yearCh) {
             System.out.println("Этот год високосный");
-        }
-        else {
+        } else {
             System.out.println("Этот год не високосный");
         }
 
