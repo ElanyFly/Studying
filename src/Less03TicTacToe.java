@@ -89,9 +89,10 @@ public class Less03TicTacToe {
             }
         }*/
         System.out.println();
-        map[0][1] = dot_x;
-        map[1][0] = dot_x;
-        map[2][1] = dot_x;
+        map[0][2] = dot_x;
+        map[1][1] = dot_x;
+        map[2][0] = dot_x;
+        map[2][2] = dot_x;
     }
 
     private static void checkWin() {
@@ -102,14 +103,45 @@ public class Less03TicTacToe {
         } else {
             System.out.println("if (checkRowCol()) LOOSER");
         }
+
+        if (checkDiagonal()){
+            System.out.println("if (checkDiagonal()) winner");
+        } else {
+            System.out.println("if (checkDiagonal()) LOOSER");
+        }
         //    result = true;
+    }
+
+    private static boolean checkDiagonal() {
+        boolean result = false;
+        int diagonalCounter = 0;
+        int diagonalCounterNeg = 0;
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (i == j && map[i][j] == dot_x) {
+                    diagonalCounter++;
+                }
+            }
+            for (int x = size - 1; x >= 0; x--) {
+                if(map[i][x + (size - 1 - x)] == dot_x){
+                    diagonalCounterNeg++;
+                }
+            }
+
+            if(diagonalCounter == size || diagonalCounterNeg == size){
+                result = true;
+            }
+
+        }
+        return result;
     }
 
     private static boolean checkRowCol(){
         boolean result = false;
 
 
-        for (int i = 0; i < size; i++) {            // i = row / j = column
+        for (int i = 0; i < size; i++) {            // i = row / j = column /// сюда можно будет добавить dot_o так же, для проверки на неё.
             int rowCounter = 0;
             int colCounter = 0;
             for (int j = 0; j < size; j++) {
@@ -123,6 +155,7 @@ public class Less03TicTacToe {
                 }
             }
         }
+
         return result;
     }
 
