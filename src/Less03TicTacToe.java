@@ -116,15 +116,17 @@ public class Less03TicTacToe {
         boolean result = false;
         int diagonalCounter = 0;
         int diagonalCounterNeg = 0;
+        int diagRowNeg = size-1;
 
         for (int i = 0; i < size; i++) {
+
             for (int j = 0; j < size; j++) {
                 if (i == j && map[i][j] == dot_x) {
                     diagonalCounter++;
                 }
             }
-            for (int x = size - 1; x >= 0; x--) {
-                if(map[i][x + (size - 1 - x)] == dot_x){
+            for (int x = diagRowNeg, rowCount = size - 1; diagRowNeg >= 0; diagRowNeg--, rowCount--) {
+                if(map[i][rowCount] == dot_x){
                     diagonalCounterNeg++;
                 }
             }
@@ -133,6 +135,8 @@ public class Less03TicTacToe {
                 result = true;
             }
 
+            diagRowNeg = size - 1;
+            diagRowNeg--;
         }
         return result;
     }
