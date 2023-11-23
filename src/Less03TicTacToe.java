@@ -14,8 +14,7 @@ public class Less03TicTacToe {
     private static Random compRand = new Random();
 
     private static boolean cellValid = true;
-    private static int rd = 0;
-    private static int st = 0;
+
 
 
     public static void main(String[] args) {
@@ -23,17 +22,18 @@ public class Less03TicTacToe {
 
         initMap();
         printMap();
-        testFillColumn();
+        //testFillColumn();
         printMap();
-        //turnHuman();
+        turnHuman();
         checkWin();
-        //turnComp();
+        turnComp();
         //CheckWin();
         //winner();
 
 
 
     }
+
 
     private static void initMap() {
         map = new char[size][size];
@@ -60,22 +60,39 @@ public class Less03TicTacToe {
     }
 
     private static void turnHuman() {
-        int st, rd;
+        int st = 0;
+        int rd = 0;
 
         do {
-            System.out.print("Введите сначала столбец, потом ряд: ");
-            st = scanner.nextInt();
-            rd = scanner.nextInt();
-        } while (!cellValid);
+            System.out.print("Введите сначала ряд, потом столбец: ");
+            rd = scanner.nextInt(size);
+            st = scanner.nextInt(size);
+        } while (!cellValid(rd, st));
 
         map[rd-1][st-1] = dot_x;
         printMap();
+    }
 
+    private static void turnComp() {
+        int rd = -1;
+        int st = -1;
+
+        do {
+            System.out.println("Ход компьютера: ");
+            rd = compRand.nextInt(size);
+            st = compRand.nextInt(size);
+        } while (!cellValid(rd, st));
+
+        map[rd][st] = dot_o;
+        printMap();
     }
 
     private static boolean cellValid(int rd, int st) {
         boolean result = true;
-        if (rd > size || st > size){
+        if (map[rd-1][st-1] == dot_x || map[rd-1][st-1] == dot_o){
+            result = false;
+        }
+        if (rd-1 > size || st-1 > size){
             result = false;
         }
         return result;
@@ -89,10 +106,13 @@ public class Less03TicTacToe {
             }
         }*/
         System.out.println();
-        map[0][2] = dot_x;
+        map[0][0] = dot_x;
+        map[0][2] = dot_o;
+        map[1][0] = dot_o;
         map[1][1] = dot_x;
         map[2][0] = dot_x;
         map[2][2] = dot_x;
+
     }
 
     private static void checkWin() {
@@ -116,18 +136,14 @@ public class Less03TicTacToe {
         boolean result = false;
         int diagonalCounter = 0;
         int diagonalCounterNeg = 0;
-        int diagRowNeg = size-1;
 
         for (int i = 0; i < size; i++) {
 
-            for (int j = 0; j < size; j++) {
-                if (i == j && map[i][j] == dot_x) {
-                    diagonalCounter++;
-                }
-            }
-            for (int x = diagRowNeg, rowCount = size - 1; diagRowNeg >= 0; diagRowNeg--, rowCount--) {
-                if(map[i][rowCount] == dot_x){
+            for(int j = 0, x = map.length - 1; j < map.length; j++, x--) {
+                if (i == x && map[i][j] == dot_x) {
                     diagonalCounterNeg++;
+                }if (i == j && map[i][j] == dot_x) {
+                    diagonalCounter++;
                 }
             }
 
@@ -135,8 +151,6 @@ public class Less03TicTacToe {
                 result = true;
             }
 
-            diagRowNeg = size - 1;
-            diagRowNeg--;
         }
         return result;
     }
@@ -166,8 +180,7 @@ public class Less03TicTacToe {
 }
 
 
-//проверь колонки
-    //проверь ряды
+
 
 
 
