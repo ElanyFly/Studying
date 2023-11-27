@@ -20,20 +20,20 @@ public class Less03TicTacToe {
 
 
         initMap();
-        //testFillColumn();
         printMap();
-        //checkDiagonal();
 
         while (emptyFields()) {
             turnHuman();
 
             if (checkWinHuman()){
                 winner();
+                break;
             }else {
                 turnComp();
 
                 if (checkWinComputer()){
                     winner();
+                    break;
                 }
             }
             if (!emptyFields()){
@@ -41,16 +41,6 @@ public class Less03TicTacToe {
                 break;
             }
         }
-
-
-//        printMap();
-//        turnHuman();
-//        checkWin();
-//        turnComp();
-        //CheckWin();
-        //winner();
-
-
     }
 
     private static void winner() {
@@ -111,11 +101,11 @@ public class Less03TicTacToe {
 
         do {
             System.out.print("Введите ряд и столбец (через пробел): ");
-            rd = scanner.nextInt(size);
-            st = scanner.nextInt(size);
+            rd = scanner.nextInt() - 1;
+            st = scanner.nextInt() - 1;
         } while (!cellValid(rd, st));
 
-        map[rd - 1][st - 1] = dot_x;
+        map[rd][st] = dot_x;
         printMap();
     }
 
@@ -125,8 +115,8 @@ public class Less03TicTacToe {
 
         do {
             System.out.println("Ход компьютера: ");
-            rd = compRand.nextInt(size-1);
-            st = compRand.nextInt(size-1);
+            rd = compRand.nextInt(size);
+            st = compRand.nextInt(size);
         } while (!cellValid(rd, st));
 
         map[rd][st] = dot_o;
@@ -135,10 +125,10 @@ public class Less03TicTacToe {
 
     private static boolean cellValid(int rd, int st) {
         boolean result = true;
-        if (map[rd - 1][st - 1] == dot_x || map[rd - 1][st - 1] == dot_o) {
+        if (map[rd][st] == dot_x || map[rd][st] == dot_o) {         // Проверяет занятость ячейки. Проверить нужно ли -1.
             result = false;
         }
-        if (rd - 1 > size || st - 1 > size) {
+        if (rd > size || st > size) {              // Проверяет превышение размера
             result = false;
         }
         return result;
@@ -160,63 +150,66 @@ public class Less03TicTacToe {
     }
 
     private static boolean checkWinHuman() {
-        boolean result = false;
-        int diagonalCounter = 0;
-        int diagonalCounterNeg = 0;
-        int rowCounter = 0;
-        int colCounter = 0;
-
-        for (int i = 0; i < size; i++) {
-            for (int j = 0, x = map.length - 1; j < map.length; j++, x--) {
-                if (i == x && map[i][j] == dot_x) {
-                    diagonalCounterNeg++;
-                }
-                if (i == j && map[i][j] == dot_x) {
-                    diagonalCounter++;
-                }
-                if (map[i][j] == dot_x || map[j][i] == dot_x) {            // условие, для присвоения результата
-                    rowCounter++;                                         // Каждый проход смотрит, нашлись ли совпадения из условия, в случае если да, начинает считать сколько.
-                    colCounter++;
-                }
-            }
-            if (diagonalCounter == size || diagonalCounterNeg == size || rowCounter == size || colCounter == size) {
-                result = true;
-            }
-        }
-
-        return result;
+        boolean isWin = checkColumn(dot_x) || checkRows(dot_x) || checkDiagonal(dot_x) || checkDiagonalNegative(dot_x);
+        return isWin;
     }
 
     private static boolean checkWinComputer() {
-        boolean result = false;
-        int diagonalCounter = 0;
+        boolean isWin = checkColumn(dot_o) || checkRows(dot_o) || checkDiagonal(dot_o) || checkDiagonalNegative(dot_o);
+        return isWin;
+    }
+
+    private static boolean checkDiagonalNegative(char playerSymbol) {
         int diagonalCounterNeg = 0;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0, x = map.length - 1; j < map.length; j++, x--) {
+                if (i == x && map[i][j] == playerSymbol) {
+                    diagonalCounterNeg++;
+                }
+            }
+        }
+        return diagonalCounterNeg == size;
+    }
+
+    private static boolean checkDiagonal(char playerSymbol) {
+        int diagonalCounter = 0;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < map.length; j++) {
+                if (i == j && map[i][j] == playerSymbol) {
+                    diagonalCounter++;
+                }
+            }
+        }
+        return diagonalCounter == size;
+    }
+
+    private static boolean checkRows(char playerSymbol) {
         int rowCounter = 0;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < map.length; j++) {
+                if (map[j][i] == playerSymbol) {            // условие, для присвоения результата
+                    rowCounter++;
+                }
+            }
+        }
+        return rowCounter == size;
+    }
+
+    private static boolean checkColumn(char playerSymbol) {
         int colCounter = 0;
 
         for (int i = 0; i < size; i++) {
-            for (int j = 0, x = map.length - 1; j < map.length; j++, x--) {
-                if (i == x && map[i][j] == dot_o) {
-                    diagonalCounterNeg++;
-                }
-                if (i == j && map[i][j] == dot_o) {
-                    diagonalCounter++;
-                }
-                if (map[i][j] == dot_o || map[j][i] == dot_o) {            // условие, для присвоения результата
-                    rowCounter++;                                         // Каждый проход смотрит, нашлись ли совпадения из условия, в случае если да, начинает считать сколько.
+            for (int j = 0; j < map.length; j++) {
+                if (map[j][i] == playerSymbol) {            // условие, для присвоения результата
                     colCounter++;
                 }
             }
-            if (diagonalCounter == size || diagonalCounterNeg == size || rowCounter == size || colCounter == size) {
-                result = true;
-            }
         }
-
-        return result;
+        return colCounter == size;
     }
 
 
-    private static boolean checkWin() {
+   /* private static boolean checkWin() {
         boolean result = false;
         //проверка колонок
         if (checkRowCol()) {
@@ -229,9 +222,9 @@ public class Less03TicTacToe {
         }
 
         return result;
-    }
+    }*/
 
-    private static boolean checkDiagonal() {
+   /* private static boolean checkDiagonal01() {
         boolean result = false;
         int diagonalCounter = 0;
         int diagonalCounterNeg = 0;
@@ -250,7 +243,7 @@ public class Less03TicTacToe {
             }
 
         }
-        /*for (int i = 0; i < map.length; i++) {
+        *//*for (int i = 0; i < map.length; i++) {
             if (map[i][i] == dot_x) {
                 diagonalCounterNeg++;
             }
@@ -263,11 +256,11 @@ public class Less03TicTacToe {
         }
         if (diagonalCounterNeg == 3) {
             System.out.println("pravo");
-        }*/
+        }*//*
         return result;
-    }
+    }*/
 
-    private static boolean checkRowCol() {
+   /* private static boolean checkRowCol() {
         boolean result = false;
 
 
@@ -288,7 +281,7 @@ public class Less03TicTacToe {
 
         return result;
     }
-
+*/
 }
 
 
