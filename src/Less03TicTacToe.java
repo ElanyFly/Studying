@@ -19,40 +19,47 @@ public class Less03TicTacToe {
     public static void main(String[] args) {
 
 
-        initMap();
-        printMap();
+        initMap(3);
 
-        while (emptyFields()) {
+        while (checkMapIsFull()) {
+            printMap();
+
             turnHuman();
-
             if (checkWinSymbol(dot_x)){
-                winner();
+                printMap();
+                winner(dot_x);
                 break;
-            }else {
-                turnComp();
 
-                if (checkWinSymbol(dot_o)){
-                    winner();
-                    break;
-                }
             }
-            if (!emptyFields()){
+
+            if (!checkMapIsFull()){
                 System.out.println("Поля закончились. \nЭТО НИЧЬЯ!");
                 break;
             }
+
+            turnComp();
+            if (checkWinSymbol(dot_o)){
+                printMap();
+                winner(dot_o);
+                break;
+            }
+
+
+
         }
     }
 
-    private static void winner() {
-        if (checkWinSymbol(dot_x)){
+
+    private static void winner(char person) {
+        if (person == dot_x){
             System.out.println("Поздравляю, Игрок. Ты победил!");
         }
-        if (checkWinSymbol(dot_o)){
+        if (person == dot_o){
             System.out.println("Увы! Компьютер победил! \nВ следующий раз получится лучше :)");
         }
     }
 
-    private static boolean emptyFields() {
+    private static boolean checkMapIsFull() {
         boolean result = true;
         int count = 0;
 
@@ -71,7 +78,8 @@ public class Less03TicTacToe {
         return result;
     }
 
-    private static void initMap() {
+    private static void initMap(int mapSize) {
+        size = mapSize;
         map = new char[size][size];
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -98,15 +106,30 @@ public class Less03TicTacToe {
     private static void turnHuman() {
         int st = 0;
         int rd = 0;
+        boolean turnIsSuccessful = false;
+        while (!turnIsSuccessful){
+            System.out.print("Введите ряд и столбец (через пробел): ");
+            rd = scanner.nextInt() - 1;
+            st = scanner.nextInt() - 1;
 
-        do {
+            if (cellValid(rd, st)) {
+                map[rd][st] = dot_x;
+                turnIsSuccessful = true;
+            } else {
+                System.out.println("Ввод был неправильный, попробуйте ещё раз.");
+            }
+        }
+
+        /*do {
             System.out.print("Введите ряд и столбец (через пробел): ");
             rd = scanner.nextInt() - 1;
             st = scanner.nextInt() - 1;
         } while (!cellValid(rd, st));
 
-        map[rd][st] = dot_x;
-        printMap();
+        map[rd][st] = dot_x;*/
+
+
+
     }
 
     private static void turnComp() {
@@ -120,15 +143,12 @@ public class Less03TicTacToe {
         } while (!cellValid(rd, st));
 
         map[rd][st] = dot_o;
-        printMap();
+
     }
 
     private static boolean cellValid(int rd, int st) {
         boolean result = true;
-        if (map[rd][st] == dot_x || map[rd][st] == dot_o) {         // Проверяет занятость ячейки. Проверить нужно ли -1.
-            result = false;
-        }
-        if (rd > size || st > size) {              // Проверяет превышение размера
+        if (map[rd][st] == dot_x || map[rd][st] == dot_o || rd > size || st > size) {         // Проверяет занятость ячейки. \ и превышение размера
             result = false;
         }
         return result;

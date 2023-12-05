@@ -13,7 +13,7 @@ public class Less02MassT5 {
         for (int j : arr) {
             if (j < min) {
                 min = j;
-            } else if (j > max) {
+            } else if (j > max) {    // памятка - лучше делать 2 if
                 max = j;
             }
         }
