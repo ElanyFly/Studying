@@ -37,7 +37,8 @@ public class Main {
 
         Bowl bowl01 = new Bowl(700);
         bowl01.bowlInfo();
-        bowl01.fillThisBowl(500);
+        bowl01.fillThisBowl();
+        bowl01.fillThisBowl();
         bowl01.bowlInfo();
 
 
