@@ -7,11 +7,13 @@ package Less04;
  * т.е. количество еды, которое он съедает за один раз;
  * 2. Кот должен есть из миски. Создайте такую сущность, которая будет обладать объёмом и едой в ней,
  * а также методами наполнения и получения информации о количестве еды;
+ * 3. Метод из первого пункта ДЗ должен взаимодействовать с миской, т.е., конкретный кот ест из конкретной миски,
+ * уменьшая объём еды в ней;
  */
 public class Cat extends Animal {
     private int appetite;
-
     private float jumpHeight;
+
 
     // конструктор 1
     public Cat (String name, boolean swim, int runLength, float jumpHeight, int swimLength, int appetite) {
@@ -22,7 +24,6 @@ public class Cat extends Animal {
     // конструктор 2
     public Cat(String name, boolean swim, int runLength, float jumpHeight, int appetite) {
         super(name, swim, runLength, jumpHeight);
-
     }
 
 

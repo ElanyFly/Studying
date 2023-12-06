@@ -17,12 +17,30 @@ public class Main {
             if (PersonArray[i].age > 40) System.out.println(PersonArray[i].printEmployee());
         }*/
 
-        Cat cat1 = new Cat("Tucha", false, 200, 2.0f, 200);
         Dog dog1 = new Dog("Pon4ik", true, 500, 0.5f, 10);
 
-        cat1.jump(1);
-        cat1.swimming(5);
+
+        //пул котов
+        Cat[] catList = new Cat[5];
+        catList[0] = new Cat("Tucha", false, 200, 3, 200);
+        catList[1] = new Cat("Monty", false, 250, 2.0f, 250);
+        catList[2] = new Cat("Milka", false, 130, 2.0f, 185);
+        catList[3] = new Cat("Sonya", false, 175, 1, 270);
+        catList[4] = new Cat("Vasya", false, 210, 2.0f, 220);
+
+
+/*
+        catList[0].jump(1);
+        catList[3].swimming(5);
         dog1.swimming(7);
+*/
+
+        Bowl bowl01 = new Bowl(700);
+        bowl01.bowlInfo();
+        bowl01.fillThisBowl(500);
+        bowl01.bowlInfo();
+
+
 
     }
 }
