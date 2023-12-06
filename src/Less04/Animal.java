@@ -13,21 +13,24 @@ package Less04;
  */
 public abstract class Animal {
 
+    private String name;
     private boolean swim;
-    private int runLenght;
+    private int runLength;
     private int swimLenght;
     private float jumpHeight;
 
-    public Animal (boolean swim, int runLenght, float jumpHeight, int swimLenght){
+    public Animal (String name, boolean swim, int runLength, float jumpHeight, int swimLength){
+        this.name = name;
         this.swim = swim;
-        this.runLenght = runLenght;
-        this.swimLenght = swimLenght;
+        this.runLength = runLength;
+        this.swimLenght = swimLength;
         this.jumpHeight = jumpHeight;
     }
 
-    public Animal (boolean swim, int runLenght, float jumpHeight){
+    public Animal (String name, boolean swim, int runLength, float jumpHeight){
+        this.name = name;
         this.swim = swim;
-        this.runLenght = runLenght;
+        this.runLength = runLength;
         this.jumpHeight = jumpHeight;
     }
 
@@ -37,17 +40,17 @@ public abstract class Animal {
         }else System.out.println("Это животное не может так высоко прыгать =(");
     }
 
-    public void run(int runLenght) {
-        if (this.runLenght >= runLenght){
-            System.out.println("Это животное успешно пробежало " + runLenght + "м.");
+    public void run(int runLength) {
+        if (this.runLength >= runLength){
+            System.out.println("Это животное успешно пробежало " + runLength + "м.");
         }else System.out.println("Это животное не может пробежать такое большое расстояние =(");
     }
 
-    public void swimming(int swimLenght) {
+    public void swimming(int swimLength) {
         if (!swim) {
             System.out.println("Это животное не умеет плавать =(");
-        } else if (swim && this.swimLenght >= swimLenght) {
-            System.out.println("Это животное успешно проплыло " + swimLenght + "м.");
+        } else if (swim && this.swimLenght >= swimLength) {
+            System.out.println("Это животное успешно проплыло " + swimLength + "м.");
         }else {
             System.out.println("Животное не может столько проплыть =(");
         }

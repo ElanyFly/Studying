@@ -10,8 +10,8 @@ public class Dog extends Animal {
 //    this.swimLenght = 10;
 
 
-    public Dog(boolean swim, int runLenght, float jumpHeight, int swimLenght) {
-        super(swim, runLenght, jumpHeight, swimLenght);
+    public Dog(String name, boolean swim, int runLength, float jumpHeight, int swimLength) {
+        super(name, swim, runLength, jumpHeight, swimLength);
 
     }
 

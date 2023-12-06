@@ -17,10 +17,10 @@ public class Main {
             if (PersonArray[i].age > 40) System.out.println(PersonArray[i].printEmployee());
         }*/
 
-        Cat cat1 = new Cat(false, 200, 2.0f);
-        Dog dog1 = new Dog(true, 500, 0.5f, 10);
+        Cat cat1 = new Cat("Tucha", false, 200, 2.0f, 200);
+        Dog dog1 = new Dog("Pon4ik", true, 500, 0.5f, 10);
 
-        cat1.jump(5);
+        cat1.jump(1);
         cat1.swimming(5);
         dog1.swimming(7);
 
