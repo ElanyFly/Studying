@@ -14,6 +14,12 @@ public class Cat extends Animal {
     private int appetite;
     private float jumpHeight;
 
+    public int getAppetite() {
+        return appetite;
+    }
+    public void setAppetite(int appetite){
+        this.appetite = appetite;
+    }
 
     // конструктор 1
     public Cat (String name, boolean swim, int runLength, float jumpHeight, int swimLength, int appetite) {
@@ -24,6 +30,7 @@ public class Cat extends Animal {
     // конструктор 2
     public Cat(String name, boolean swim, int runLength, float jumpHeight, int appetite) {
         super(name, swim, runLength, jumpHeight);
+        this.appetite = appetite;
     }
 
 
@@ -34,6 +41,7 @@ public class Cat extends Animal {
             System.out.println("Этa кошечка успешно прыгнула на высоту " + jumpHeight + "м.");
         }else System.out.println("Этa кошечка не может так высоко прыгнуть =(");
     }
+
 }
 
 

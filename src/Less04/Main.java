@@ -19,7 +19,6 @@ public class Main {
 
         Dog dog1 = new Dog("Pon4ik", true, 500, 0.5f, 10);
 
-
         //пул котов
         Cat[] catList = new Cat[5];
         catList[0] = new Cat("Tucha", false, 200, 3, 200);
@@ -38,11 +37,30 @@ public class Main {
         Bowl bowl01 = new Bowl(700);
         bowl01.bowlInfo();
         bowl01.fillThisBowl();
-        bowl01.fillThisBowl();
         bowl01.bowlInfo();
 
 
+        int bowlFill = bowl01.getBowlFill();
+        int catAppetite = catList[0].getAppetite();
+        int leftInBowlResult = bowlFill - catAppetite;
+
+        if (leftInBowlResult>=0){
+            catList[0].setAppetite(0);
+        } else {
+            catList[0].setAppetite(leftInBowlResult * -1);
+        }
+
+        bowl01.setBowlFill(leftInBowlResult);
+
+        System.out.println("bowlFill = " + bowlFill + ", catAppetite = " + catAppetite + ", leftInBowlResult = " + leftInBowlResult);
+        System.out.println("кот поел, в миске осталось " + leftInBowlResult + ", аппетит этого котика на уровне " + catAppetite);
+
+        bowl01.bowlInfo();
+
 
     }
+
+
+
 }
 

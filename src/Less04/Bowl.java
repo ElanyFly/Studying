@@ -13,7 +13,8 @@ import java.util.Scanner;
 public class Bowl {
 
     private int bowlSize;
-    private int bowlFullness = 0;
+    private static int bowlFullness = 0;
+
     private int bowlFill;
     private Scanner pourTheFeed = new Scanner(System.in);
 
@@ -24,7 +25,7 @@ public class Bowl {
 
     // 2 метода отдельно - 1) наполнение миски(DONE), 2) информация о заполненности миски(DONE).
     public void bowlInfo () {
-        System.out.println("В миске насыпано " + bowlFullness + " грамм корма.");
+        System.out.println("В миске насыпано " + bowlFill + " грамм корма.");
     }
 
     public void fillThisBowl () {
@@ -32,20 +33,27 @@ public class Bowl {
 
         System.out.print("Введите сколько корма насыпать в миску: ");
         feedAmountToPour = pourTheFeed.nextInt();
-        bowlFullness = bowlFullness + feedAmountToPour;
+        bowlFill = bowlFullness + feedAmountToPour;
 
-        if (bowlFullness >bowlSize){
-            bowlFullness = bowlSize;
+        if (bowlFill >bowlSize){
+            bowlFill = bowlSize;
             System.out.println("Вы насыпали слишком много корма, но не волнуйтесь, миска наполнилась, однако излишки пропали = (");
         }
 
-        if (bowlFullness <1){
-            bowlFullness = 0;
+        if (bowlFill <1){
+            bowlFill = 0;
             System.out.println("Миска опустела.");
         }
-
-
     }
+
+    public int getBowlFill(){
+        return bowlFill;
+    }
+
+    public void setBowlFill (int bowlFill){
+        this.bowlFill = bowlFill;
+    }
+
 
 
 
