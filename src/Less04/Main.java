@@ -2,6 +2,7 @@ package Less04;
 
 public class Main {
 
+
     public static void main (String[] args) {
 
        /* Employee[] PersonArray = new Employee[5];
@@ -21,11 +22,11 @@ public class Main {
 
         //пул котов
         Cat[] catList = new Cat[5];
-        catList[0] = new Cat("Tucha", false, 200, 3, 200);
-        catList[1] = new Cat("Monty", false, 250, 2.0f, 250);
-        catList[2] = new Cat("Milka", false, 130, 2.0f, 185);
-        catList[3] = new Cat("Sonya", false, 175, 1, 270);
-        catList[4] = new Cat("Vasya", false, 210, 2.0f, 220);
+        catList[0] = new Cat("Tucha", false, 200, 3, 200, false);
+        catList[1] = new Cat("Monty", false, 250, 2.0f, 250, false);
+        catList[2] = new Cat("Milka", false, 130, 2.0f, 185, false);
+        catList[3] = new Cat("Sonya", false, 175, 1, 270, false);
+        catList[4] = new Cat("Vasya", false, 210, 2.0f, 220, false);
 
 
 /*
@@ -37,7 +38,7 @@ public class Main {
         Bowl bowl01 = new Bowl(700);    // создана миска
         bowl01.bowlInfo();
         bowl01.setBowlFill(120);    // наполнили миску для проверки не полностью.
-        //bowl01.fillThisBowl();    // Вызов ручного выбора наполнения
+        //bowl01.fillThisBowl();    // Вызов ручного ввода наполнения миски
         bowl01.bowlInfo();
 
 

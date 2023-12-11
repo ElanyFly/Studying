@@ -9,9 +9,12 @@ package Less04;
  * а также методами наполнения и получения информации о количестве еды;
  * 3. Метод из первого пункта ДЗ должен взаимодействовать с миской, т.е., конкретный кот ест из конкретной миски,
  * уменьшая объём еды в ней;
+ * 5. Каждому коту нужно добавить поле сытость (когда создаем котов, они голодны).
+ * Если коту удалось поесть (хватило еды), сытость = true; DONE
  */
 public class Cat extends Animal {
     private int appetite;
+    private boolean areYouFull;
     private float jumpHeight;
 
     public int getAppetite() {
@@ -22,15 +25,17 @@ public class Cat extends Animal {
     }
 
     // конструктор 1
-    public Cat (String name, boolean swim, int runLength, float jumpHeight, int swimLength, int appetite) {
+    public Cat (String name, boolean swim, int runLength, float jumpHeight, int swimLength, int appetite, boolean areYouFull) {
         super(name, swim, runLength, jumpHeight, swimLength);
         this.jumpHeight = jumpHeight;
         this.appetite = appetite;
+        this.areYouFull = areYouFull;
     }
     // конструктор 2
-    public Cat(String name, boolean swim, int runLength, float jumpHeight, int appetite) {
+    public Cat(String name, boolean swim, int runLength, float jumpHeight, int appetite, boolean areYouFull) {
         super(name, swim, runLength, jumpHeight);
         this.appetite = appetite;
+        this.areYouFull = areYouFull;
     }
 
 
