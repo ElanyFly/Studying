@@ -2,6 +2,14 @@ package Less04;
 
 public class Main {
 
+    /**
+     * Считаем, что если коту мало еды в тарелке, то он её просто не трогает, то есть не может быть
+     * наполовину сыт (это сделано для упрощения логики программы);
+     *
+     * 6. Создать массив котов и одну тарелку с едой, попросить всех котов покушать из этой тарелки
+     * и потом вывести информацию о сытости котов в консоль;
+     *
+     */
 
     public static void main (String[] args) {
 
@@ -37,37 +45,58 @@ public class Main {
 
         Bowl bowl01 = new Bowl(700);    // создана миска
         bowl01.bowlInfo();
-        bowl01.setBowlFill(120);    // наполнили миску для проверки не полностью.
+        bowl01.setBowlFill(700);    // наполнили миску для проверки не полностью.
         //bowl01.fillThisBowl();    // Вызов ручного ввода наполнения миски
         bowl01.bowlInfo();
 
 
-        int bowlFill = bowl01.getBowlFill();
-        int catAppetite = catList[0].getAppetite();
-        int leftInBowlResult = bowlFill - catAppetite;
-        int hungryCat = leftInBowlResult * -1;   // срабатывает, только при отрицательном значении миски. По факту там выходит минус.
+        for (Cat cat : catList) {
+            feedCat(bowl01, cat);
 
-        if (leftInBowlResult>=0){                       // если съел столько же сколько было в миске, или меньше, то аппетит удовлетворен, а миска опустела
-            catList[0].setAppetite(0);
-            bowlFill = leftInBowlResult;
-        } else {                                        // Если при потреблении пищи, еда ушла в минус
-            catList[0].setAppetite(hungryCat);
-            leftInBowlResult = 0;
         }
-
-        bowl01.setBowlFill(leftInBowlResult);
-
-        catAppetite = catList[0].getAppetite();         // проверка сколько осталось недоедено аппетита
-
-        System.out.println("bowlFill = " + bowlFill + ", catAppetite = " + catAppetite + ", leftInBowlResult = " + leftInBowlResult);
-        System.out.println("кот поел, в миске осталось " + leftInBowlResult + ", аппетит этого котика на уровне " + catAppetite);
-
-        bowl01.bowlInfo();
+        printCatsFillInfo (catList);
 
 
     }
 
+    private static void printCatsFillInfo(Cat[] catList) {
+        for (Cat cat : catList){
+            System.out.println("Голоден ли котик " + cat.getName() + "? Ответ: " + cat.getAreYouFull() + " Сытость котика - " + cat.getAppetite());
+        }
 
+    }
+
+    private static void feedCat(Bowl bowl, Cat cat) {
+        int bowlFill = bowl.getBowlFill();
+        int catAppetite = cat.getAppetite();
+        int leftInBowlResult = bowlFill - catAppetite;
+        int hungryCat = leftInBowlResult * -1;   // срабатывает, только при отрицательном значении миски. По факту там выходит минус.
+
+
+        if (leftInBowlResult>=0){                       // если съел столько же сколько было в миске, или меньше, то аппетит удовлетворен, а миска опустела
+            cat.setAppetite(0);                // не будем переписывать их аппетит. величина будет неизменной
+            //bowlFill = leftInBowlResult;                // еды стало меньше в миске
+            cat.setAreYouFull(true);             // кот сыт
+            System.out.println("Котик " + cat.getName() + " наелся и радуется жизни! :)");
+        } else {                                        // Если при потреблении пищи, еда ушла в минус
+            cat.setAppetite(hungryCat);
+            leftInBowlResult = 0;
+            System.out.println("Котик " + cat.getName() + " по прежнему голоден :(");
+        }
+
+        bowl.setBowlFill(leftInBowlResult);
+
+
+    }
+// Считаем, что если коту мало еды в тарелке, то он её просто не трогает, то есть не может быть
+//наполовину сыт (это сделано для упрощения логики программы);
+
+//    catAppetite = cat.getAppetite();         // проверка сколько осталось недоедено аппетита
+//
+//        System.out.println("bowlFill = " + bowlFill + ", catAppetite = " + catAppetite + ", leftInBowlResult = " + leftInBowlResult);
+//        System.out.println("кот поел, в миске осталось " + leftInBowlResult + ", аппетит этого котика на уровне " + catAppetite);
+//
+//        bowl.bowlInfo();
 
 }
 

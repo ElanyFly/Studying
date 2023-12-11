@@ -19,6 +19,11 @@ public abstract class Animal {
     private int swimLenght;
     private float jumpHeight;
 
+    public String getName() {
+        return this.name;
+    }
+
+
     public Animal (String name, boolean swim, int runLength, float jumpHeight, int swimLength){
         this.name = name;
         this.swim = swim;

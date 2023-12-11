@@ -17,6 +17,13 @@ public class Cat extends Animal {
     private boolean areYouFull;
     private float jumpHeight;
 
+    public boolean getAreYouFull() {
+        return areYouFull;
+    }
+    public void setAreYouFull(boolean areYouFull) {
+        this.areYouFull = areYouFull;
+    }
+
     public int getAppetite() {
         return appetite;
     }
