@@ -9,6 +9,8 @@ import java.util.Scanner;
  *  3. Метод из первого пункта ДЗ должен взаимодействовать с миской, т.е., конкретный кот ест из конкретной миски,
  *  * уменьшая объём еды в ней;
  *
+ *7. Когда еда в тарелке кончается, нужно оповещать об этом и наполнять её едой.
+ *
  */
 public class Bowl {
 
@@ -40,7 +42,7 @@ public class Bowl {
             System.out.println("Вы насыпали слишком много корма, но не волнуйтесь, миска наполнилась, однако излишки пропали = (");
         }
 
-        if (bowlFill <1){
+        if (bowlFill <=0){
             bowlFill = 0;
             System.out.println("Миска опустела.");
         }
@@ -63,8 +65,9 @@ public class Bowl {
         return checkFill;
     }
 
-    public void noFoodLeft () {
-
+    public boolean noFoodLeft () {
+        boolean result = bowlFill <= 0;
+        return result;
     }
 
 

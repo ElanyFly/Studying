@@ -43,16 +43,20 @@ public class Main {
         dog1.swimming(7);
 */
 
-        Bowl bowl01 = new Bowl(700);    // создана миска
-        bowl01.bowlInfo();
-        bowl01.setBowlFill(700);    // наполнили миску для проверки не полностью.
-        //bowl01.fillThisBowl();    // Вызов ручного ввода наполнения миски
-        bowl01.bowlInfo();
+        Bowl bowl = new Bowl(1700);    // создана миска
+        bowl.bowlInfo();
+        //bowl.setBowlFill(700);    // наполнили миску для проверки не полностью.
+        bowl.fillThisBowl();    // Вызов ручного ввода наполнения миски
+        bowl.bowlInfo();
 
 
         for (Cat cat : catList) {
-            feedCat(bowl01, cat);
-
+            feedCat(bowl, cat);
+            if (bowl.noFoodLeft()) {
+                System.out.println("Насыпьте еще корма, он закончился");
+                bowl.fillThisBowl();
+                feedCat(bowl, cat);
+            }
         }
         printCatsFillInfo (catList);
 
