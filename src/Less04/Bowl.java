@@ -54,7 +54,18 @@ public class Bowl {
         this.bowlFill = bowlFill;
     }
 
+    public boolean CheckBowlFillNotMinus () {               // 4. Предусмотрите проверку, при которой в миске не может получиться отрицательного количества еды
+                                                            // (например, в миске 10 единиц еды, а кот пытается съесть 15);
+        boolean checkFill = false;
+        if (bowlFill<1) {
+            checkFill = true;
+        }
+        return checkFill;
+    }
 
+    public void noFoodLeft () {
+
+    }
 
 
 }

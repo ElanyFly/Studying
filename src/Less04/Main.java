@@ -34,23 +34,29 @@ public class Main {
         dog1.swimming(7);
 */
 
-        Bowl bowl01 = new Bowl(700);
+        Bowl bowl01 = new Bowl(700);    // создана миска
         bowl01.bowlInfo();
-        bowl01.fillThisBowl();
+        bowl01.setBowlFill(120);    // наполнили миску для проверки не полностью.
+        //bowl01.fillThisBowl();    // Вызов ручного выбора наполнения
         bowl01.bowlInfo();
 
 
         int bowlFill = bowl01.getBowlFill();
         int catAppetite = catList[0].getAppetite();
         int leftInBowlResult = bowlFill - catAppetite;
+        int hungryCat = leftInBowlResult * -1;   // срабатывает, только при отрицательном значении миски. По факту там выходит минус.
 
-        if (leftInBowlResult>=0){
+        if (leftInBowlResult>=0){                       // если съел столько же сколько было в миске, или меньше, то аппетит удовлетворен, а миска опустела
             catList[0].setAppetite(0);
-        } else {
-            catList[0].setAppetite(leftInBowlResult * -1);
+            bowlFill = leftInBowlResult;
+        } else {                                        // Если при потреблении пищи, еда ушла в минус
+            catList[0].setAppetite(hungryCat);
+            leftInBowlResult = 0;
         }
 
         bowl01.setBowlFill(leftInBowlResult);
+
+        catAppetite = catList[0].getAppetite();         // проверка сколько осталось недоедено аппетита
 
         System.out.println("bowlFill = " + bowlFill + ", catAppetite = " + catAppetite + ", leftInBowlResult = " + leftInBowlResult);
         System.out.println("кот поел, в миске осталось " + leftInBowlResult + ", аппетит этого котика на уровне " + catAppetite);
