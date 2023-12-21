@@ -51,8 +51,48 @@ public class Main implements ActionListener {
         functionButtons[6] = delButton;
         functionButtons[7] = clrButton;
 
-        
+        for (int i = 0; i < 8; i++) {
+            functionButtons[i].addActionListener(this);
+            functionButtons[i].setFont(myFont);
+            functionButtons[i].setFocusable(false);                 // чтобы не было обводки у кнопки при ее нажатии.
+        }
 
+        for (int i = 0; i < 10; i++) {                              //луп для обработки кнопок с цифрами
+            numberButtons[i] = new JButton(String.valueOf(i));      //задали цифры
+            numberButtons[i].addActionListener(this);
+            numberButtons[i].setFont(myFont);
+            numberButtons[i].setFocusable(false);
+        }
+
+        delButton.setBounds(50, 430, 145,50);       //предустановили позицию этих кнопок
+        clrButton.setBounds(205, 430, 145, 50);
+
+        panel = new JPanel();
+        panel.setBounds(50, 100, 300, 300);
+        panel.setLayout(new GridLayout(4, 4, 10, 10));          // задали сетку для кнопок. ряды, колонки, расстояние между кнопками\
+        //panel.setBackground(Color.CYAN);                                            //временно подкрасили панель
+
+        //добавим кнопки на эту панель, в определенном порядке.
+        panel.add(numberButtons[1]);
+        panel.add(numberButtons[2]);
+        panel.add(numberButtons[3]);
+        panel.add(addButton);
+        panel.add(numberButtons[4]);
+        panel.add(numberButtons[5]);
+        panel.add(numberButtons[6]);
+        panel.add(subButton);
+        panel.add(numberButtons[7]);
+        panel.add(numberButtons[8]);
+        panel.add(numberButtons[9]);
+        panel.add(mulButton);
+        panel.add(decButton);
+        panel.add(numberButtons[0]);
+        panel.add(equButton);
+        panel.add(divButton);
+
+        frame.add(panel);
+        frame.add(delButton);                                       //добавили эти две кнопки на панель.
+        frame.add(clrButton);
         frame.add(textField);                                       //добавили его во фрейм
         frame.setVisible(true);                                     //установили видимость
 
