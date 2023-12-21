@@ -10,9 +10,9 @@ public class Main implements ActionListener {
     JFrame frame;
     JTextField textField;                                       //будет содержать наши цифры и результат (окошка ввода)
     JButton[] numberButtons = new JButton[10];
-    JButton[] functionButtons = new JButton[8];
+    JButton[] functionButtons = new JButton[9];
     JButton addButton, subButton, mulButton, divButton;         // назвали кнопки операций
-    JButton decButton, equButton, delButton, clrButton;
+    JButton decButton, equButton, delButton, clrButton, negButton;
     JPanel panel;                                               // панель на которой будут все эти кнопки
 
     Font myFont = new Font("Helvetica", Font.BOLD, 30);     //задали шрифт для кнопок
@@ -41,6 +41,7 @@ public class Main implements ActionListener {
         equButton = new JButton("=");
         delButton = new JButton("Del");
         clrButton = new JButton("CE");
+        negButton = new JButton("(-)");
 
         functionButtons[0] = addButton;             //назначили кнопки в массив
         functionButtons[1] = subButton;
@@ -50,8 +51,9 @@ public class Main implements ActionListener {
         functionButtons[5] = equButton;
         functionButtons[6] = delButton;
         functionButtons[7] = clrButton;
+        functionButtons[8] = negButton;
 
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 9; i++) {
             functionButtons[i].addActionListener(this);
             functionButtons[i].setFont(myFont);
             functionButtons[i].setFocusable(false);                 // чтобы не было обводки у кнопки при ее нажатии.
@@ -64,8 +66,9 @@ public class Main implements ActionListener {
             numberButtons[i].setFocusable(false);
         }
 
-        delButton.setBounds(50, 430, 145,50);       //предустановили позицию этих кнопок
-        clrButton.setBounds(205, 430, 145, 50);
+        negButton.setBounds(50, 430, 100, 50);
+        delButton.setBounds(150, 430, 100,50);       //предустановили позицию этих кнопок
+        clrButton.setBounds(250, 430, 100, 50);
 
         panel = new JPanel();
         panel.setBounds(50, 100, 300, 300);
@@ -91,6 +94,7 @@ public class Main implements ActionListener {
         panel.add(divButton);
 
         frame.add(panel);
+        frame.add(negButton);
         frame.add(delButton);                                       //добавили эти две кнопки на панель.
         frame.add(clrButton);
         frame.add(textField);                                       //добавили его во фрейм
@@ -172,6 +176,12 @@ public class Main implements ActionListener {
                 textField.setText(textField.getText() + string.charAt(i));
                 
             }
+        }
+        if (e.getSource() == negButton) {                               //луп убирает последнее набранное число.
+            double temp = Double.parseDouble(textField.getText());
+            temp = temp*-1;
+            textField.setText(String.valueOf(temp));
+
         }
 
     }
