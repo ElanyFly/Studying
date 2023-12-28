@@ -14,14 +14,14 @@ package Less04;
  */
 public class Cat extends Animal {
     private int appetite;
-    private boolean areYouFull;
+    private boolean isAreYouFull;
     private float jumpHeight;
 
     public boolean getAreYouFull() {
-        return areYouFull;
+        return isAreYouFull;
     }
     public void setAreYouFull(boolean areYouFull) {
-        this.areYouFull = areYouFull;
+        this.isAreYouFull = areYouFull;
     }
 
     public int getAppetite() {
@@ -32,17 +32,17 @@ public class Cat extends Animal {
     }
 
     // конструктор 1
-    public Cat (String name, boolean swim, int runLength, float jumpHeight, int swimLength, int appetite, boolean areYouFull) {
+    public Cat (String name, boolean swim, int runLength, float jumpHeight, int swimLength, int appetite, boolean isAreYouFull) {
         super(name, swim, runLength, jumpHeight, swimLength);
         this.jumpHeight = jumpHeight;
         this.appetite = appetite;
-        this.areYouFull = areYouFull;
+        this.isAreYouFull = isAreYouFull;
     }
     // конструктор 2
-    public Cat(String name, boolean swim, int runLength, float jumpHeight, int appetite, boolean areYouFull) {
+    public Cat(String name, boolean swim, int runLength, float jumpHeight, int appetite, boolean isAreYouFull) {
         super(name, swim, runLength, jumpHeight);
         this.appetite = appetite;
-        this.areYouFull = areYouFull;
+        this.isAreYouFull = isAreYouFull;
     }
 
 

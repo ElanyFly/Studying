@@ -15,9 +15,8 @@ import java.util.Scanner;
 public class Bowl {
 
     private int bowlSize;
-    private static int bowlFullness = 0;
 
-    private int bowlFill;
+    private int bowlFill = 0;
     private Scanner pourTheFeed = new Scanner(System.in);
 
     // конструктор миски
@@ -31,11 +30,10 @@ public class Bowl {
     }
 
     public void fillThisBowl () {
-        int feedAmountToPour;
 
         System.out.print("Введите сколько корма насыпать в миску: ");
-        feedAmountToPour = pourTheFeed.nextInt();
-        bowlFill = bowlFullness + feedAmountToPour;
+        int feedAmountToPour = pourTheFeed.nextInt();
+        bowlFill = bowlFill + feedAmountToPour;
 
         if (bowlFill >bowlSize){
             bowlFill = bowlSize;
@@ -55,16 +53,7 @@ public class Bowl {
     public void setBowlFill (int bowlFill){
         this.bowlFill = bowlFill;
     }
-
-    public boolean CheckBowlFillNotMinus () {               // 4. Предусмотрите проверку, при которой в миске не может получиться отрицательного количества еды
-                                                            // (например, в миске 10 единиц еды, а кот пытается съесть 15);
-        boolean checkFill = false;
-        if (bowlFill<1) {
-            checkFill = true;
-        }
-        return checkFill;
-    }
-
+    
     public boolean noFoodLeft () {
         boolean result = bowlFill <= 0;
         return result;
