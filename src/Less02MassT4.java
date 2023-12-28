@@ -10,9 +10,9 @@ public class Less02MassT4 {
         byte[][] table = new byte[3][3];
 
         for (int i = 0; i < table.length; i++){
-            for(int k = 0, x = table.length - 1; k < table.length; k++, x--){
-                if(i == k || i == x){
-                    table[i][k] = 1;
+            for(int j = 0, x = table.length - 1; j < table.length; j++, x--){
+                if(i == j || i == x){
+                    table[i][j] = 1;
                 }
             }
 
