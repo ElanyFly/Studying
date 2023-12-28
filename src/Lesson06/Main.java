@@ -31,12 +31,16 @@ public class Main extends JFrame implements ActionListener {
             btns.add(jTmpButton);                                               // помещаем эти кнопки в массив.
         }
 
-        List<String> operations = Arrays.asList("+", "-", "*", "/", "=", "C");       // сделали список с операциями.
+        List<String> operations = Arrays.asList("+", "-", "*", "/", "=", "C");       // сделали список с операциями. Эти штуки it
 
         JPanel buttons = new JPanel();                      // создали место куда мы будем помещать кнопки
         btns.forEach(buttons::add);                         //перетаскиваем все кнопки на панель (что это за точки?)
-        operations.forEach(it -> {                          // т.к. стринги необходимо преквратить все в кнопки и потом добавить. Что здесь происходит?)
-            JButton jTmpButton = new JButton(it);           // я тут типа это и сделала. Сейчас кнопки отображаются, но ничего не делают.
+
+//        for (JButton button: btns) {                      //с двумя точками - это краткая форма такой записи.
+//            buttons.add(button);
+//        }
+        operations.forEach(operation -> {                          // т.к. стринги необходимо преквратить все в кнопки и потом добавить. it можно переименовать как угодно.
+            JButton jTmpButton = new JButton(operation);           // я тут типа это и сделала. Сейчас кнопки отображаются, но ничего не делают.
             jTmpButton.addActionListener(listen);
             buttons.add(jTmpButton);
         });
@@ -73,6 +77,7 @@ public class Main extends JFrame implements ActionListener {
             a = operation = b = "";
             result.setText(a + operation + b);
         } else if (s.charAt(0) == '=') {                    // операция равно
+            if (operation.isBlank()){return;}               //чтобы не было ошибки при нажатии = до вычислений
             int rslt = switch (operation) {
                 case "+" -> Integer.parseInt(a) + Integer.parseInt(b);
                 case "-" -> Integer.parseInt(a) - Integer.parseInt(b);
