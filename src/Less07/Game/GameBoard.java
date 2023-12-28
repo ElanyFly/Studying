@@ -74,5 +74,33 @@ public class GameBoard extends JFrame {
 
     }
 
+    Game getGame() {
+        return game;
+    }
 
+    boolean isTurnable (int x, int y) {
+        boolean result = false;
+
+        if (gameField[y][x] == nullSymbol) {
+            result = true;
+        }
+
+        return result;
+    }
+
+    void updateGameField (int x, int y) {
+        gameField[y][x] = game.getCurrentPlayer().getPlayerSign();
+    }
+
+    boolean checkWin() {
+        boolean result = false;
+
+        char playerSymbol = getGame().getCurrentPlayer().getPlayerSign();
+
+        if (checkWinDiagonal(playerSymbol) || checkWinLines(playerSymbol)) {
+            result = true;
+        }
+
+        return result;
+    }
 }
