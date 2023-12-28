@@ -7,20 +7,63 @@
 import java.util.Scanner;
 public class Less02MassT6 {
 
+    private static Scanner tableSize = new Scanner(System.in);
+    private static Scanner numIns = new Scanner(System.in);
+    private static int size;
+    private static int[] numbersArr;
+
     public static void main (String[] args){
 
-        int[] arr = new int[6];
-        Scanner numIns = new Scanner(System.in);
-
-        for ( int i = 0; i < arr.length; i++){
-            System.out.print("Введите число: ");
-            int num = numIns.nextInt();
-            arr[i] = num;
+        initTable();
+        printTable(numbersArr);
+        if (checkBalance(numbersArr)){
+            System.out.println("\nПоловинки равны");
+        } else {
+            System.out.println("\nПоловинки НЕ равны");
         }
 
+    }
 
-        if (arr[0] + arr[1] + arr[2] == arr[3] + arr[4] + arr[5]){
-            System.out.println("true");
-        }else System.out.println("false");
+    public static void initTable(){
+        System.out.print("Задайте размер массива: ");
+        size = tableSize.nextInt();
+
+        numbersArr = new int[size];
+
+        for ( int i = 0; i < size; i++){
+            System.out.print("Введите число: ");
+            int num = numIns.nextInt();
+            numbersArr[i] = num;
+        }
+    }
+
+    public static void printTable (int[] arr) {
+        System.out.print("\nСоздан массив: ");
+        for (int i : arr ) {
+            System.out.print(i + "\t");
+        }
+
+    }
+    public static boolean checkBalance (int[] arr) {
+
+        boolean result = false;
+        int leftSide = 0;
+        int rightSide = 0;
+        boolean equalSize = size % 2 == 0;
+        int middleNumber = size / 2;
+
+        for (int i = 0; i < size/2; i++) {
+            leftSide += arr[i];
+            rightSide += arr[size-1-i];
+        }
+
+        if (!equalSize) {
+            leftSide += arr[middleNumber];
+        }
+        if (leftSide == rightSide){
+            result = true;
+        }
+
+        return result;
     }
 }
