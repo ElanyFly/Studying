@@ -92,7 +92,7 @@ public class GameBoard extends JFrame {
         gameField[y][x] = game.getCurrentPlayer().getPlayerSign();
     }
 
-    boolean checkWin() {
+  /*  boolean checkWin() {
         boolean result = false;
 
         char playerSymbol = getGame().getCurrentPlayer().getPlayerSign();
@@ -102,5 +102,5 @@ public class GameBoard extends JFrame {
         }
 
         return result;
-    }
+    }*/
 }
