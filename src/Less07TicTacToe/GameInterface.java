@@ -10,7 +10,7 @@ public class GameInterface {
     private final int size = 3;
 
     JButton newGameButton;
-    JButton[][] gameField = new JButton[size][size];
+    JButton[][] gameFieldButton = new JButton[size][size];
 
 
     Font myFont = new Font("Helvetica", Font.BOLD, 15);
@@ -32,15 +32,15 @@ public class GameInterface {
         frame.setLayout(null);                      //без этого, у панели не будут устанавливаться границы
 
 
-        gameField[0][0] = new JButton ("1");
-        gameField[0][1] = new JButton ("2");
-        gameField[0][2] = new JButton ("3");
-        gameField[1][0] = new JButton ("4");
-        gameField[1][1] = new JButton ("5");
-        gameField[1][2] = new JButton ("6");
-        gameField[2][0] = new JButton ("7");
-        gameField[2][1] = new JButton ("8");
-        gameField[2][2] = new JButton ("9");
+        gameFieldButton[0][0] = new JButton ("1");
+        gameFieldButton[0][1] = new JButton ("2");
+        gameFieldButton[0][2] = new JButton ("3");
+        gameFieldButton[1][0] = new JButton ("4");
+        gameFieldButton[1][1] = new JButton ("5");
+        gameFieldButton[1][2] = new JButton ("6");
+        gameFieldButton[2][0] = new JButton ("7");
+        gameFieldButton[2][1] = new JButton ("8");
+        gameFieldButton[2][2] = new JButton ("9");
 
 
 
@@ -56,8 +56,8 @@ public class GameInterface {
 
         for (int i = 0; i < size; i++) {
            for (int j = 0; j < size; j++) {
-               gameField[i][j].setFont(myFont);
-              panel.add(gameField[i][j]);
+               gameFieldButton[i][j].setFont(myFont);
+              panel.add(gameFieldButton[i][j]);
            }
         }
 
