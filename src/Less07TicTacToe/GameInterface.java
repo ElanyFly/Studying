@@ -2,24 +2,24 @@ package Less07TicTacToe;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
 
-public class GameInterface {
+public class GameInterface implements ActionListener {
 
     JFrame frame;
     JPanel panel;
-    private final int size = 3;
+    static final int size = 3;
 
     JButton newGameButton;
     JButton[][] gameFieldButton = new JButton[size][size];
 
 
     Font myFont = new Font("Helvetica", Font.BOLD, 15);
+    Font buttonFont = new Font("Tahoma", Font.BOLD, 35);
 
-    private void initButtons(){
-
-
-
-    }
+    private static Random compRand = new Random();
 
 
     GameInterface () {
@@ -32,21 +32,22 @@ public class GameInterface {
         frame.setLayout(null);                      //без этого, у панели не будут устанавливаться границы
 
 
-        gameFieldButton[0][0] = new JButton ("1");
-        gameFieldButton[0][1] = new JButton ("2");
-        gameFieldButton[0][2] = new JButton ("3");
-        gameFieldButton[1][0] = new JButton ("4");
-        gameFieldButton[1][1] = new JButton ("5");
-        gameFieldButton[1][2] = new JButton ("6");
-        gameFieldButton[2][0] = new JButton ("7");
-        gameFieldButton[2][1] = new JButton ("8");
-        gameFieldButton[2][2] = new JButton ("9");
+        gameFieldButton[0][0] = new JButton ("");
+        gameFieldButton[0][1] = new JButton ("");
+        gameFieldButton[0][2] = new JButton ("");
+        gameFieldButton[1][0] = new JButton ("");
+        gameFieldButton[1][1] = new JButton ("");
+        gameFieldButton[1][2] = new JButton ("");
+        gameFieldButton[2][0] = new JButton ("");
+        gameFieldButton[2][1] = new JButton ("");
+        gameFieldButton[2][2] = new JButton ("");
 
 
 
         newGameButton = new JButton("New game");
         newGameButton.setFont(myFont);
         newGameButton.setBounds(40, 35, 150, 40);
+        newGameButton.setFocusable(false);
 
         panel = new JPanel();
         panel.setBounds(40, 90, 400, 400);
@@ -56,12 +57,12 @@ public class GameInterface {
 
         for (int i = 0; i < size; i++) {
            for (int j = 0; j < size; j++) {
-               gameFieldButton[i][j].setFont(myFont);
-              panel.add(gameFieldButton[i][j]);
+               gameFieldButton[i][j].setFont(buttonFont);
+               panel.add(gameFieldButton[i][j]);
+               gameFieldButton[i][j].addActionListener(this);
+               gameFieldButton[i][j].setFocusable(false);           //убирает рамку вокруг текста кнопки
            }
         }
-
-
 
 
         frame.add(newGameButton);
@@ -69,6 +70,40 @@ public class GameInterface {
         //frame.add();
 
         frame.setVisible(true);
+
+    }
+
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (e.getSource()==gameFieldButton[i][j]) {
+                    if (GameLogic.humanTurn){
+                        if (gameFieldButton[i][j].getText()==""){
+                            gameFieldButton[i][j].setForeground(new Color(20, 97, 231));
+                            gameFieldButton[i][j].setText("X");
+                            GameLogic.humanTurn = false;
+
+                        }
+
+                    } else {
+                        //GameLogic.compTurn();
+
+                        do {
+                            i=compRand.nextInt(size);
+                            j=compRand.nextInt(size);
+                        }while (gameFieldButton[i][j].getText()=="");
+                        gameFieldButton[i][j].setForeground(new Color(231, 20, 147));
+                        gameFieldButton[i][j].setText("O");
+                        GameLogic.humanTurn = true;
+
+                    }
+                }
+            }
+        }
 
     }
 }
