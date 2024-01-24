@@ -19,33 +19,47 @@ public class GameLogic {
     private  boolean cellValid = true;
 
     private ResultListener resultListener;
+
+    private final int defaultValueNumber = 999;
+
+    int st = defaultValueNumber;
+    int rd = defaultValueNumber;
+
     public void subscribeOnResultListener(ResultListener resultListener){
         this.resultListener = resultListener;
     }
 
     public void runGame(){
-        initMap();
-        printMap();
+        new Thread(
+            () -> {
+                initMap();
+                printMap();
+                while (emptyFields()) {
+                    turnHuman();
 
-        while (emptyFields()) {
-            turnHuman();
+                    if (checkWinSymbol(dot_x)){
+                        winner();
+                        break;
+                    }else {
+                        turnComp();
 
-            if (checkWinSymbol(dot_x)){
-                winner();
-                break;
-            }else {
-                turnComp();
-
-                if (checkWinSymbol(dot_o)){
-                    winner();
-                    break;
+                        if (checkWinSymbol(dot_o)){
+                            winner();
+                            break;
+                        }
+                    }
+                    if (!emptyFields()){
+                        System.out.println("Поля закончились. \nЭТО НИЧЬЯ!");
+                        break;
+                    }
                 }
             }
-            if (!emptyFields()){
-                System.out.println("Поля закончились. \nЭТО НИЧЬЯ!");
-                break;
-            }
-        }
+        ).start();
+    }
+
+    public void putTurn(int x, int y) {
+        st = y;
+        rd = x;
     }
 
     private void winner() {
@@ -101,19 +115,21 @@ public class GameLogic {
         resultListener.listenResult(map);
     }
 
-    private void turnHuman() {
-        int st = 0;
-        int rd = 0;
+    private synchronized void turnHuman() {
 
         do {
-            System.out.print("Введите ряд и столбец (через пробел): ");
-            rd = scanner.nextInt() - 1;
-            st = scanner.nextInt() - 1;
+            try {
+                wait(16L);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         } while (!cellValid(rd, st));
-
         map[rd][st] = dot_x;
         printMap();
+        st = defaultValueNumber;
+        rd = defaultValueNumber;
     }
+
 
     private void turnComp() {
         int rd = -1;
@@ -130,6 +146,7 @@ public class GameLogic {
     }
 
     private  boolean cellValid(int rd, int st) {
+        if (rd == defaultValueNumber || st == defaultValueNumber) return false;
         boolean result = true;
         if (map[rd][st] == dot_x || map[rd][st] == dot_o) {         // Проверяет занятость ячейки. Проверить нужно ли -1.
             result = false;
@@ -214,5 +231,6 @@ public class GameLogic {
         }
         return false;
     }
+
 
 }

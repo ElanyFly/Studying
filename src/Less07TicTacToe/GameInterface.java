@@ -8,16 +8,16 @@ import java.util.Random;
 
 public class GameInterface implements ActionListener {
 
-    JFrame frame;
-    JPanel panel;
-    static final int size = 3;
+    private JFrame frame;
+    private JPanel panel;
+    private final int size = 3;
 
-    JButton newGameButton;
-    JButton[][] gameFieldButton = new JButton[size][size];
+    private JButton newGameButton;
+    private JButton[][] gameFieldButton = new JButton[size][size];
 
 
-    Font myFont = new Font("Helvetica", Font.BOLD, 15);
-    Font buttonFont = new Font("Tahoma", Font.BOLD, 35);
+    private Font myFont = new Font("Helvetica", Font.BOLD, 15);
+    private Font buttonFont = new Font("Tahoma", Font.BOLD, 35);
 
     private static Random compRand = new Random();
 
@@ -72,7 +72,10 @@ public class GameInterface implements ActionListener {
 
     }
 
-
+    private ClickListener clickListener;
+    public void subscribeOnClickListener(ClickListener clickListener){
+        this.clickListener = clickListener;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -80,25 +83,7 @@ public class GameInterface implements ActionListener {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 if (e.getSource()==gameFieldButton[i][j]) {
-
-                        if (gameFieldButton[i][j].getText()==""){
-                            gameFieldButton[i][j].setForeground(new Color(20, 97, 231));
-                            gameFieldButton[i][j].setText("X");
-
-                        }
-
-//                    else {
-//                        //GameLogic.compTurn();
-//
-//                        do {
-//                            i=compRand.nextInt(size);
-//                            j=compRand.nextInt(size);
-//                        }while (gameFieldButton[i][j].getText()=="");
-//                        gameFieldButton[i][j].setForeground(new Color(231, 20, 147));
-//                        gameFieldButton[i][j].setText("O");
-//
-//
-//                    }
+                    clickListener.listenActions(i, j);
                 }
             }
         }

@@ -5,17 +5,15 @@ public class MainGame implements ResultListener, ClickListener {
     private final GameInterface gameInterface = new GameInterface();
 
     public void run() {
-
         gameLogic.subscribeOnResultListener(this);
-
+        gameInterface.subscribeOnClickListener(this);
         gameLogic.runGame();
-        
     }
 
 
     @Override
     public void listenActions(int x, int y) {
-
+        gameLogic.putTurn(x, y);
     }
 
     @Override
