@@ -67,7 +67,6 @@ public class GameInterface implements ActionListener {
 
         frame.add(newGameButton);
         frame.add(panel);
-        //frame.add();
 
         frame.setVisible(true);
 
@@ -81,29 +80,37 @@ public class GameInterface implements ActionListener {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 if (e.getSource()==gameFieldButton[i][j]) {
-                    if (GameLogic.humanTurn){
+
                         if (gameFieldButton[i][j].getText()==""){
                             gameFieldButton[i][j].setForeground(new Color(20, 97, 231));
                             gameFieldButton[i][j].setText("X");
-                            GameLogic.humanTurn = false;
 
                         }
 
-                    } else {
-                        //GameLogic.compTurn();
-
-                        do {
-                            i=compRand.nextInt(size);
-                            j=compRand.nextInt(size);
-                        }while (gameFieldButton[i][j].getText()=="");
-                        gameFieldButton[i][j].setForeground(new Color(231, 20, 147));
-                        gameFieldButton[i][j].setText("O");
-                        GameLogic.humanTurn = true;
-
-                    }
+//                    else {
+//                        //GameLogic.compTurn();
+//
+//                        do {
+//                            i=compRand.nextInt(size);
+//                            j=compRand.nextInt(size);
+//                        }while (gameFieldButton[i][j].getText()=="");
+//                        gameFieldButton[i][j].setForeground(new Color(231, 20, 147));
+//                        gameFieldButton[i][j].setText("O");
+//
+//
+//                    }
                 }
             }
         }
 
+    }
+
+    public void drawField(char[][] array) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                char ibragim = array[i][j];
+                gameFieldButton[i][j].setText(String.valueOf(ibragim));
+            }
+        }
     }
 }
