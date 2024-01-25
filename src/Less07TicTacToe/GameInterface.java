@@ -10,6 +10,7 @@ public class GameInterface implements ActionListener {
 
     private JFrame frame;
     private JPanel panel;
+    private JTextField textField;
     private final int size = 3;
 
     private JButton newGameButton;
@@ -26,9 +27,8 @@ public class GameInterface implements ActionListener {
 
         frame = new JFrame("Крестики-нолики");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 570);
+        frame.setSize(500, 600);
         frame.setLocationRelativeTo(null);
-
         frame.setLayout(null);                      //без этого, у панели не будут устанавливаться границы
 
 
@@ -49,8 +49,13 @@ public class GameInterface implements ActionListener {
         newGameButton.setBounds(40, 35, 150, 40);
         newGameButton.setFocusable(false);
 
+        textField = new JTextField();
+        textField.setFont(myFont);
+        textField.setBounds(40, 80, 400, 50);
+        textField.setEditable(false);
+
         panel = new JPanel();
-        panel.setBounds(40, 90, 400, 400);
+        panel.setBounds(40, 140, 400, 400);
         panel.setLayout(new GridLayout(3, 3, 5, 5));
         //panel.setBackground(Color.CYAN);
 
@@ -66,6 +71,7 @@ public class GameInterface implements ActionListener {
 
 
         frame.add(newGameButton);
+        frame.add(textField);
         frame.add(panel);
 
         frame.setVisible(true);
