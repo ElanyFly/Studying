@@ -10,7 +10,8 @@ public class GameInterface implements ActionListener {
 
     private JFrame frame;
     private JPanel panel;
-    private JTextField textField;
+    private JLabel textLabel;
+    private JPanel textPanel;
     private final int size = 3;
 
     private JButton newGameButton;
@@ -43,21 +44,25 @@ public class GameInterface implements ActionListener {
         gameFieldButton[2][2] = new JButton ("");
 
 
-
         newGameButton = new JButton("New game");
         newGameButton.setFont(myFont);
-        newGameButton.setBounds(40, 35, 150, 40);
+        newGameButton.setBounds(40, 30, 150, 40);
         newGameButton.setFocusable(false);
 
-        textField = new JTextField();
-        textField.setFont(myFont);
-        textField.setBounds(40, 80, 400, 50);
-        textField.setEditable(false);
+
+        textLabel = new JLabel();
+        textLabel.setBackground(Color.darkGray);
+        textLabel.setBounds(40, 80, 400,50);
+        textLabel.setFont(myFont);
+        textLabel.setForeground(Color.white);
+        textLabel.setHorizontalAlignment(JLabel.CENTER);
+        textLabel.setText("Check Chek");
+        textLabel.setOpaque(true);
+
 
         panel = new JPanel();
         panel.setBounds(40, 140, 400, 400);
         panel.setLayout(new GridLayout(3, 3, 5, 5));
-        //panel.setBackground(Color.CYAN);
 
 
         for (int i = 0; i < size; i++) {
@@ -71,7 +76,7 @@ public class GameInterface implements ActionListener {
 
 
         frame.add(newGameButton);
-        frame.add(textField);
+        frame.add(textLabel);
         frame.add(panel);
 
         frame.setVisible(true);
@@ -79,8 +84,14 @@ public class GameInterface implements ActionListener {
     }
 
     private ClickListener clickListener;
+
     public void subscribeOnClickListener(ClickListener clickListener){
         this.clickListener = clickListener;
+    }
+
+
+    private void receiveMessage(GameLogic showMessage){
+        //this.showMessage = showMessage;
     }
 
     @Override
@@ -90,6 +101,7 @@ public class GameInterface implements ActionListener {
             for (int j = 0; j < size; j++) {
                 if (e.getSource()==gameFieldButton[i][j]) {
                     clickListener.listenActions(i, j);
+                    //textLabel.setText(receiveMessage(showMessage));
                 }
             }
         }

@@ -1,12 +1,13 @@
 package Less07TicTacToe;
 
-public class MainGame implements ResultListener, ClickListener {
+public class MainGame extends GameLogic implements ResultListener, ClickListener {
     private final GameLogic gameLogic = new GameLogic();
     private final GameInterface gameInterface = new GameInterface();
 
     public void run() {
         gameLogic.subscribeOnResultListener(this);
         gameInterface.subscribeOnClickListener(this);
+
         gameLogic.runGame();
     }
 
@@ -20,4 +21,6 @@ public class MainGame implements ResultListener, ClickListener {
     public void listenResult(char[][] array) {
         gameInterface.drawField(array);
     }
+
+
 }

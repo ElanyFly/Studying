@@ -49,6 +49,7 @@ public class GameLogic {
                         }
                     }
                     if (!emptyFields()){
+                        showMessage("ЭТО НИЧЬЯ!");
                         System.out.println("Поля закончились. \nЭТО НИЧЬЯ!");
                         break;
                     }
@@ -57,13 +58,18 @@ public class GameLogic {
         ).start();
     }
 
-    public void putTurn(int x, int y) {
+    private void showMessage (String message){
+
+    }
+
+    public void putTurn(int x, int y){
         st = y;
         rd = x;
     }
 
-    private void winner() {
+    private void winner(){
         if (checkWinSymbol(dot_x)){
+            showMessage("Игрок победил");
             System.out.println("Поздравляю, Игрок. Ты победил!");
         }
         if (checkWinSymbol(dot_o)){
@@ -71,7 +77,7 @@ public class GameLogic {
         }
     }
 
-    private boolean emptyFields() {
+    private boolean emptyFields(){
         boolean result = true;
         int count = 0;
 
