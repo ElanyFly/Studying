@@ -11,7 +11,7 @@ public class GameLogic {
 
     private final char dot_x = 'X';
     private final char dot_o = 'O';
-    private  final char dot_empty = '%';
+    private  final char dot_empty = ' ';
 
     private  Scanner scanner = new Scanner(System.in);
     private  Random compRand = new Random();
@@ -50,7 +50,6 @@ public class GameLogic {
                     }
                     if (!emptyFields()){
                         showMessage("ЭТО НИЧЬЯ!");
-                        System.out.println("Поля закончились. \nЭТО НИЧЬЯ!");
                         break;
                     }
                 }
@@ -59,7 +58,7 @@ public class GameLogic {
     }
 
     private void showMessage (String message){
-
+        resultListener.listenMessage(message);
     }
 
     public void putTurn(int x, int y){
@@ -70,10 +69,9 @@ public class GameLogic {
     private void winner(){
         if (checkWinSymbol(dot_x)){
             showMessage("Игрок победил");
-            System.out.println("Поздравляю, Игрок. Ты победил!");
         }
         if (checkWinSymbol(dot_o)){
-            System.out.println("Увы! Компьютер победил! \nВ следующий раз получится лучше :)");
+            showMessage("Увы! Компьютер победил!");
         }
     }
 
@@ -122,7 +120,7 @@ public class GameLogic {
     }
 
     private synchronized void turnHuman() {
-
+        showMessage("Ход игрока");
         do {
             try {
                 wait(16L);
@@ -137,16 +135,21 @@ public class GameLogic {
     }
 
 
-    private void turnComp() {
+    private synchronized void turnComp() {
         int rd = -1;
         int st = -1;
 
+        showMessage("Ход компьютера");
         do {
-            System.out.println("Ход компьютера: ");
             rd = compRand.nextInt(size);
             st = compRand.nextInt(size);
         } while (!cellValid(rd, st));
 
+        try {
+            wait(3000L);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         map[rd][st] = dot_o;
         printMap();
     }

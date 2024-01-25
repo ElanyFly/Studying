@@ -90,8 +90,8 @@ public class GameInterface implements ActionListener {
     }
 
 
-    private void receiveMessage(GameLogic showMessage){
-        //this.showMessage = showMessage;
+    public void receiveMessage(String domsText){
+        textLabel.setText(domsText);
     }
 
     @Override
