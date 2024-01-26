@@ -242,4 +242,8 @@ public class GameLogic {
     }
 
 
+    public void startNewGame() {
+        initMap();
+        printMap();
+    }
 }

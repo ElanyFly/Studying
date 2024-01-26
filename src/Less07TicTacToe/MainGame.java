@@ -18,6 +18,11 @@ public class MainGame implements ResultListener, ClickListener {
     }
 
     @Override
+    public void clickNewGame() {
+        gameLogic.startNewGame();
+    }
+
+    @Override
     public void listenResult(char[][] array) {
         gameInterface.drawField(array);
     }

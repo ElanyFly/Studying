@@ -48,6 +48,7 @@ public class GameInterface implements ActionListener {
         newGameButton.setFont(myFont);
         newGameButton.setBounds(40, 30, 150, 40);
         newGameButton.setFocusable(false);
+        newGameButton.addActionListener(this);
 
 
         textLabel = new JLabel();
@@ -99,9 +100,11 @@ public class GameInterface implements ActionListener {
 
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                if (e.getSource()==gameFieldButton[i][j]) {
+                if (e.getSource() == gameFieldButton[i][j]) {
                     clickListener.listenActions(i, j);
-                    //textLabel.setText(receiveMessage(showMessage));
+                }
+                if (e.getSource() == newGameButton){
+                    clickListener.clickNewGame();
                 }
             }
         }
@@ -116,4 +119,5 @@ public class GameInterface implements ActionListener {
             }
         }
     }
+
 }
