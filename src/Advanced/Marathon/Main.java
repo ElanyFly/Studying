@@ -10,16 +10,41 @@ import Advanced.Marathon.Participants.Dog;
 import Advanced.Marathon.Participants.Human;
 import Advanced.Marathon.Participants.Team;
 
-public class Main implements MaraphonInfo {
+public class Main {
 
-    private final Course course = new Course();
 
 
     public static void main(String[] args) {
 
 
-//        Competitor[] competitors = {new Human("Боб"), new Cat("Барсик"), new Dog("Бобик")};
-//        Obstacle[] course = {new Cross(80), new Wall(2), new Wall(1), new Cross(120)};
+        Competitor[] competitors1 = {new Human("Боб"), new Cat("Барсик"), new Dog("Бобик")};
+        Team gogo = new Team("Vitalisha", competitors1);
+
+        Competitor[] competitors = {new Human("Eric"), new Cat ("Monty"), new Dog("Sharik"), new Human("Melissa")};
+        Team gogo2 = new Team("Natasha", competitors);
+
+        Obstacle[] obstacles = {new Cross(80), new Wall(2), new Wall(1), new Cross(120)};
+        Course course = new Course(obstacles);
+
+        Obstacle[] obstacles2 = {new Cross(1000), new Wall(4)};
+        Course course2 = new Course(obstacles2);
+
+        Maraphon maraphon = new Maraphon();
+        maraphon.addTeam(gogo);
+        maraphon.addTeam(gogo2);
+        maraphon.addCourse(course);
+        maraphon.addCourse(course2);
+        maraphon.startMaraphon();
+
+
+
+
+
+
+
+
+//
+//
 //        for (Competitor c : competitors) {
 //            for (Obstacle o : course) {
 //                o.doIt(c);
@@ -35,10 +60,7 @@ public class Main implements MaraphonInfo {
     }
 
 
-    @Override
-    public void startMaraphon() {
 
-    }
 }
 
 

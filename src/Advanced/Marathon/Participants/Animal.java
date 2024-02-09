@@ -63,8 +63,14 @@ public class Animal implements Competitor {
     }
 
     @Override
-    public void info() {
-        System.out.println(type + " " + name + " - " + onDistance);
+    public String info() {
+        String onTheField;
+        if (isOnDistance()){
+            onTheField = "участвует";
+        } else {
+            onTheField = "не участвует";
+        }
+        return type + " " + name + " - " + onTheField;
     }
 
 

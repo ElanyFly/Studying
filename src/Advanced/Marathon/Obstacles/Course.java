@@ -1,40 +1,48 @@
 package Advanced.Marathon.Obstacles;
 
-import Advanced.Marathon.Competitor;
-import Advanced.Marathon.MaraphonInfo;
-import Advanced.Marathon.Participants.Team;
-
 public class Course {
+
+    private Obstacle[] courseInit;
+
+
+    public Course(Obstacle[] courseInit) {
+        this.courseInit = courseInit;
+    }
+
+    public Obstacle[] getCourseInit() {
+        return courseInit;
+    }
+
+
+//    private void startMaraphon(Team team) {
+//        for (Obstacle course : courseInit) {
+//            course.doIt((Competitor) team);
+//            if (!((Competitor) team).isOnDistance()){
+//                break;
+//            }
+//        }
+//    }
+
 
 //    Course[] obstacles;
 
-    MaraphonInfo maraphonInfo;
-    public void getMaraphonInfo (MaraphonInfo maraphonInfo) {
-        this.maraphonInfo = maraphonInfo;
-    }
+//    MaraphonInfo maraphonInfo;
+//    public void getMaraphonInfo (MaraphonInfo maraphonInfo) {
+//        this.maraphonInfo = maraphonInfo;
+//    }
+//
+//    Competitor competitor;
+//    public void getTeamInfo (Competitor competitor) {
+//        this.competitor = competitor;
+//    }
 
-    Competitor competitor;
-    public void getTeamInfo (Competitor competitor) {
-        this.competitor = competitor;
-    }
-
-
-
-
-    void passObstacleCourse() {
-
-    }
-
-    Obstacle[] courseInit = {new Cross(80), new Wall(2), new Wall(1), new Cross(120)};
-
-    void startCourse (MaraphonInfo maraphonInfo) {
-
-        for (Competitor participants : getTeamInfo()) {
-
-        }
-
-    }
-
+//    void startCourse (Competitor competitor, Obstacle[] obstacle) {
+//
+//        for (Competitor participants : getTeamInfo()) {
+//
+//        }
+//
+//    }
 
 //    void startCourse (Competitor ) {
 //

@@ -56,7 +56,13 @@ public class Human implements Competitor {
     }
 
     @Override
-    public void info() {
-        System.out.println(name + " - " + active);
+    public String info() {
+        String onTheField;
+        if (active){
+            onTheField = "участвует";
+        } else {
+            onTheField = "не участвует";
+        }
+        return name + " - " + onTheField;
     }
 }

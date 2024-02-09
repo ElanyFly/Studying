@@ -1,34 +1,35 @@
 package Advanced.Marathon.Participants;
 
 import Advanced.Marathon.Competitor;
-import Advanced.Marathon.Obstacles.Course;
-import Advanced.Marathon.Obstacles.Obstacle;
 
 public class Team {
 
-    String name;
-    Team[] team;
+    private String name;
+    private final Competitor[] competitors;
 
+    public String getName(){
+        return name;
+    }
 
+    public Competitor[] getCompetitors(){
+        return competitors;
+    }
 
-    private Team(String name, Competitor... competitor){
+    public Team(String name, Competitor[] competitors) {
         this.name = name;
-    }
-
-    void thoseWhoPassed() {
+        this.competitors = competitors;
 
     }
 
-    void teamInfo() {
-
+    public void printTeamList() {
+        if (name != null && competitors != null){
+            System.out.println("Команда " + name + " включает следующих участников: ");
+            for (Competitor competitor : competitors) {
+                System.out.println(competitor.info());
+            }
+        }
     }
 
-    Competitor[] competitors = {new Human("Eric"), new Cat ("Monty"), new Dog("Sharik"), new Human("Melissa")};
-
-    void participants (Team[] team) {
-
-        this.team = team;
-    }
 
 
 }
