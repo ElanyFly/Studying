@@ -29,12 +29,24 @@ public class Main {
         Obstacle[] obstacles2 = {new Cross(1000), new Wall(4)};
         Course course2 = new Course(obstacles2);
 
+        Speaker volodya = new Speaker() {                       //володя принимает в себя инфо и озвучивает это
+            @Override
+            public void tellMarathonInfo(String info) {
+                System.out.println(info);
+            }
+        };
+
         Maraphon maraphon = new Maraphon();
         maraphon.addTeam(gogo);
         maraphon.addTeam(gogo2);
         maraphon.addCourse(course);
         maraphon.addCourse(course2);
+
+        maraphon.setSpeaker(                                        // сюда надо экземпляр спикера
+            volodya
+        );
         maraphon.startMaraphon();
+
 
 
 

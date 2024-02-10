@@ -9,8 +9,11 @@ import java.util.List;
 
 public class Maraphon {
 
-    List<Team> teamList = new ArrayList<>();
-    List<Course> courseList = new ArrayList<>();
+    private final List<Team> teamList = new ArrayList<>();
+    private final List<Course> courseList = new ArrayList<>();
+    private Speaker speaker;
+
+
 
     void addTeam(Team team) {
         teamList.add(team);
@@ -18,6 +21,10 @@ public class Maraphon {
 
     void addCourse(Course team) {
         courseList.add(team);
+    }
+
+    void setSpeaker(Speaker speaker) {
+        this.speaker = speaker;
     }
 
     void startMaraphon() {
@@ -28,10 +35,10 @@ public class Maraphon {
                     for (Competitor competitor: team.getCompetitors()) {
                         obstacle.doIt(competitor);
                         if (!competitor.isOnDistance()){
-                            System.out.println("Команда " + team.getName() + " не прошла полосу.");
+                            speaker.tellMarathonInfo("Команда " + team.getName() + " не прошла полосу.");           //подставляем спикер и марафон инфо, чтобы эта информация (в скобках) ушла в интерфейс
                             break;
                         }
-                        System.out.println("Команда " + team.getName() + " прошла полосу.");
+                        speaker.tellMarathonInfo("Команда " + team.getName() + " прошла полосу.");
                     }
                 }
 
