@@ -6,11 +6,11 @@ import Advanced.Marathon.Competitor;
 public class Human implements Competitor {
     String name;
 
-    int maxRunDistance;
-    int maxJumpHeight;
-    int maxSwimDistance;
+    private final int maxRunDistance;
+    private final int maxJumpHeight;
+    private final int maxSwimDistance;
 
-    boolean active;
+    private boolean active;
 
     @Override
     public boolean isOnDistance() {

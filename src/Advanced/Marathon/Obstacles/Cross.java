@@ -4,7 +4,7 @@ package Advanced.Marathon.Obstacles;
 import Advanced.Marathon.Competitor;
 
 public class Cross extends Obstacle {
-    int length;
+    private final int length;
 
     public Cross(int length) {
         this.length = length;

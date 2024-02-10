@@ -7,11 +7,11 @@ public class Team {
     private String name;
     private final Competitor[] competitors;
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public Competitor[] getCompetitors(){
+    public Competitor[] getCompetitors() {
         return competitors;
     }
 
@@ -22,14 +22,12 @@ public class Team {
     }
 
     public void printTeamList() {
-        if (name != null && competitors != null){
+        if (name != null && competitors != null) {
             System.out.println("Команда " + name + " включает следующих участников: ");
             for (Competitor competitor : competitors) {
                 System.out.println(competitor.info());
             }
         }
     }
-
-
 
 }

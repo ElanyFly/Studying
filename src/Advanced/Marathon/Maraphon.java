@@ -13,8 +13,6 @@ public class Maraphon {
     private final List<Course> courseList = new ArrayList<>();
     private Speaker speaker;
 
-
-
     void addTeam(Team team) {
         teamList.add(team);
     }
@@ -42,21 +40,20 @@ public class Maraphon {
     }
 
     private void teamTryToDoObstacles(Team team, Course course) {
-        for (Obstacle obstacle : course.getCourseInit()){
+        for (Obstacle obstacle : course.getCourseInit()) {
             teamTryToDoCompetition(team, obstacle);
         }
     }
 
     private void teamTryToDoCompetition(Team team, Obstacle obstacle) {
-        for (Competitor competitor: team.getCompetitors()) {
+        for (Competitor competitor : team.getCompetitors()) {
             obstacle.doIt(competitor);
-            if (!competitor.isOnDistance()){
+            if (!competitor.isOnDistance()) {
                 speaker.tellMarathonInfo("Команда " + team.getName() + " не прошла полосу.");           //подставляем спикер и марафон инфо, чтобы эта информация (в скобках) ушла в интерфейс
                 break;
             }
             speaker.tellMarathonInfo("Команда " + team.getName() + " прошла полосу.");
         }
     }
-
 }
 

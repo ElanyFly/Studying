@@ -4,7 +4,7 @@ package Advanced.Marathon.Obstacles;
 import Advanced.Marathon.Competitor;
 
 public class Water extends Obstacle {
-    int length;
+    private final int length;
 
     public Water(int length) {
         this.length = length;

@@ -13,14 +13,13 @@ import Advanced.Marathon.Participants.Team;
 public class Main {
 
 
-
     public static void main(String[] args) {
 
 
         Competitor[] competitors1 = {new Human("Боб"), new Cat("Барсик"), new Dog("Бобик")};
         Team gogo = new Team("Vitalisha", competitors1);
 
-        Competitor[] competitors = {new Human("Eric"), new Cat ("Monty"), new Dog("Sharik"), new Human("Melissa")};
+        Competitor[] competitors = {new Human("Eric"), new Cat("Monty"), new Dog("Sharik"), new Human("Melissa")};
         Team gogo2 = new Team("Natasha", competitors);
 
         Obstacle[] obstacles = {new Cross(80), new Wall(2), new Wall(1), new Cross(120)};
@@ -43,36 +42,11 @@ public class Main {
         maraphon.addCourse(course2);
 
         maraphon.setSpeaker(                                        // сюда надо экземпляр спикера
-            volodya
+                volodya
         );
         maraphon.startMaraphon();
 
-
-
-
-
-
-
-
-
-//
-//
-//        for (Competitor c : competitors) {
-//            for (Obstacle o : course) {
-//                o.doIt(c);
-//                if (!c.isOnDistance()) break;
-//            }
-//        }
-//        for (Competitor c : competitors) {
-//            c.info();
-//        }
-
-
-
     }
-
-
-
 }
 
 
