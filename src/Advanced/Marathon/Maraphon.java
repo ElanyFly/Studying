@@ -30,20 +30,31 @@ public class Maraphon {
     void startMaraphon() {
         for (Team team : teamList) {
             team.printTeamList();
-            for (Course course : courseList) {
-                for (Obstacle obstacle : course.getCourseInit()){
-                    for (Competitor competitor: team.getCompetitors()) {
-                        obstacle.doIt(competitor);
-                        if (!competitor.isOnDistance()){
-                            speaker.tellMarathonInfo("Команда " + team.getName() + " не прошла полосу.");           //подставляем спикер и марафон инфо, чтобы эта информация (в скобках) ушла в интерфейс
-                            break;
-                        }
-                        speaker.tellMarathonInfo("Команда " + team.getName() + " прошла полосу.");
-                    }
-                }
+            teamTryToDoMarathon(team);
+        }
+    }
 
+    // приватные методы нужны как комплекс для паблик метода (для стартмарафон)
+    private void teamTryToDoMarathon(Team team) {
+        for (Course course : courseList) {
+            teamTryToDoObstacles(team, course);
+        }
+    }
 
+    private void teamTryToDoObstacles(Team team, Course course) {
+        for (Obstacle obstacle : course.getCourseInit()){
+            teamTryToDoCompetition(team, obstacle);
+        }
+    }
+
+    private void teamTryToDoCompetition(Team team, Obstacle obstacle) {
+        for (Competitor competitor: team.getCompetitors()) {
+            obstacle.doIt(competitor);
+            if (!competitor.isOnDistance()){
+                speaker.tellMarathonInfo("Команда " + team.getName() + " не прошла полосу.");           //подставляем спикер и марафон инфо, чтобы эта информация (в скобках) ушла в интерфейс
+                break;
             }
+            speaker.tellMarathonInfo("Команда " + team.getName() + " прошла полосу.");
         }
     }
 
