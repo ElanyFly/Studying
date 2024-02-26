@@ -1,6 +1,7 @@
 package YandexPracticum01;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class Sprint01 {
     public static void main(String[] args) {
@@ -148,16 +149,133 @@ public class Sprint01 {
             }
         }*/
 
-        for (int i = 1; i <= 30; i++) {
+/*        for (int i = 1; i <= 30; i++) {
             System.out.println("День " + i);
             for (int j = 1; j <= 3; j++) {
                 System.out.println(" Серия " + j);
             }
         }
-        System.out.println("Ура! Вы прокачали и Java, и английский!");
+        System.out.println("Ура! Вы прокачали и Java, и английский!");*/
 
-
-
+        executeWorkingDay();
 
     }
+
+    private static void executeWorkingDay() {
+        System.out.println("Время 11.00");
+
+        // опять этот надоедливый будильник
+
+        alarmClock();
+
+        // нам срочно нужен кофе
+        System.out.println("Пойти на кухню");
+
+        boilingWater();
+        System.out.println("Взять кофе и включить ноутбук");
+
+        System.out.println("Посмотреть мемы про менеджеров за кружкой кофе"); // да, куда же без мемов?
+        watchingMemes();
+
+        // О, на часах уже полдень, пора бы начать работать.
+        int time = 12;
+
+        time = workingTillEight(time);
+
+        System.out.println("Пора бы поиграть в Playstation");
+
+        while (time <= 24) {
+            System.out.println("Пиу пи");
+            time++;
+        }
+
+        System.out.println("Кажется, пора посмотреть фильм и пойти спать");
+        watchingMovie();
+        System.out.println("Ну вот, пора спать :(");
+    }
+
+    private static int workingTillEight(int time) {
+        // поработаем-ка мы до 8 вечера
+        while (time <= 20) {
+            System.out.println("Писать код... Клац, клац...");
+            time++;
+
+            // не плохо бы приготовить ещё чашку кофе
+            if (time % 3 == 0) {
+                boilingWater();
+                System.out.println("Взять кофе и вернуться делать: 'клац... клац...'");
+            }
+        }
+        return time;
+    }
+
+    private static void watchingMovie() {
+        System.out.println("Алиса, помоги выбрать фильм");
+
+        while (isThisFilmInteresting()) {
+            System.out.println("Алиса, не то");
+        }
+
+        System.out.println("То что нужно! Отличный фильм");
+    }
+
+    private static void watchingMemes() {
+        for (int i = 5; i >= 0; i--) {
+            if (i == 0) {
+                System.out.println("Кажется, пора работать");
+            } else {
+                System.out.println("О_о, ещё мемчик");
+            }
+        }
+    }
+
+    private static void boilingWater() {
+        if (isKettleEmpty()) {
+            System.out.println("Налить воды в чайник");
+        }
+        System.out.println("Включить чайник");
+
+        for (int i = 4; i >= 0; i--) {
+            switch (i) {
+                case 0:
+                    System.out.println("Вода закипела");
+                    break;
+                case 1:
+                    System.out.println("Вода закипит через минуту");
+                    break;
+                default:
+                    System.out.println("Вода закипит через " + i + " минуты");
+                    break;
+            }
+        }
+        System.out.println("Приготовить кофе");
+    }
+
+    private static void alarmClock() {
+        while (true) {
+            System.out.println("Будильник: БЗЗЗЗЗЗЗЫЫЫЫЫЫЫНЬ!");
+            if (isProgrammerWakeUp()) {
+                break;
+            }
+        }
+    }
+
+    // программисты любят поспать подольше
+    private static boolean isProgrammerWakeUp() {
+        int random = new Random().nextInt(5); // этот метод позволяет сгенерировать случайное число от 0 до 4
+        return random == 0;
+    }
+
+    // воды в чайнике может и не быть :(
+    private static boolean isKettleEmpty() {
+        return new Random().nextBoolean(); // этот метод позволяет сгенерировать случайное значение типа boolean (true или false)
+    }
+
+    // давайте выберем интересный фильм
+    private static boolean isThisFilmInteresting() {
+        int random = new Random().nextInt(3); // этот метод позволяет сгенерировать случайное число от 0 до 2
+        return random != 0;
+    }
+
+
 }
