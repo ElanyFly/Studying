@@ -16,12 +16,12 @@ public class Hw01Enum {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-
         System.out.println("Введите день недели: ");
         String day = scanner.next();
 
-//        if (!day.equals(String.valueOf(DayOfWeek.valueOf(day)))) {
-//            System.out.println("Введён неверный день.");
+//        if (!day.equals(DayOfWeek.valueOf(day).toString())) {
+//        if (!DayOfWeek.values().equals(day)) {
+//            System.out.println("Введён неверный день!!.");
 //        } else {
 //            hoursLeft(DayOfWeek.valueOf(day));
 //        }
@@ -57,32 +57,58 @@ public class Hw01Enum {
                 System.out.println("Сегодня выходной.");
                 break;
             }
-            default: {
-                System.out.println("Введён неправильный день недели.");
-                break;
-            }
+            default: assert false: "Неизвестный день.";
+
+//                System.out.println("Введён неправильный день недели.");
+//                break;
+
         }
     }
 }
 
 enum DayOfWeek {
-
     Понедельник, Вторник, Среда, Четверг, Пятница, Суббота, Воскресенье;
 
-//    Monday("Понедельник", "Пн"),
-//    Tuesday("Вторник", "Вт"),
-//    Wednesday("Среда", "Ср"),
-//    Thursday("Четверг", "Чт"),
-//    Friday("Пятница", "Пт"),
-//    Saturday("Суббота", "Сб"),
-//    Sunday("Воскресенье", "Вс");
-//
-//    private String ru;
-//    private String shortRu;
-//    DayOfWeek(String ru, String shortRu) {
-//        this.ru = ru;
-//        this.shortRu = shortRu;
-//    }
 }
 
+enum DayOfWeek2 {
+    Monday("Понедельник", "Пн"),
+    Tuesday("Вторник", "Вт"),
+    Wednesday("Среда", "Ср"),
+    Thursday("Четверг", "Чт"),
+    Friday("Пятница", "Пт"),
+    Saturday("Суббота", "Сб"),
+    Sunday("Воскресенье", "Вс");
 
+    private String ru;
+    private String shortRu;
+
+    DayOfWeek2(String ru, String shortRu) {
+        this.ru = ru;
+        this.shortRu = shortRu;
+    }
+
+    public String getRu() {
+        return ru;
+    }
+
+    public String getShortRu() {
+        return shortRu;
+    }
+}
+
+class CheckingDays {
+    DayOfWeek2 dayOfWeek2;
+    String monday = DayOfWeek2.Monday.getRu();
+    String mondayShortRu = DayOfWeek2.Monday.getShortRu();
+
+//    public void checkHoursLeft(DayOfWeek2 dayOfWeek2) {
+//        switch (dayOfWeek2 || dayOfWeek2.getRu() || dayOfWeek2.getShortRu()) {
+//            case Monday:
+//            case DayOfWeek2.Monday.getRu():
+//            case DayOfWeek2.Monday.getShortRu():
+//        }
+//    }
+
+
+}
