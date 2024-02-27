@@ -1,5 +1,7 @@
 package AdvLesson02.Exceptions;
 
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Hw01Enum {
@@ -14,15 +16,17 @@ public class Hw01Enum {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+
         System.out.println("Введите день недели: ");
         String day = scanner.next();
 
-        if (!day.equals(DayOfWeek.values())) {
-            System.out.println("Введён неверный день.");
-        } else {
-            hoursLeft(DayOfWeek.valueOf(day));
-        }
+//        if (!day.equals(String.valueOf(DayOfWeek.valueOf(day)))) {
+//            System.out.println("Введён неверный день.");
+//        } else {
+//            hoursLeft(DayOfWeek.valueOf(day));
+//        }
 
+        hoursLeft(DayOfWeek.valueOf(day));
 
     }
 
@@ -80,4 +84,5 @@ enum DayOfWeek {
 //        this.shortRu = shortRu;
 //    }
 }
+
 
