@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 
+import static AdvLesson02.Exceptions.DayOfWeek2.*;
+
 public class Hw01Enum {
 /*
     Написать метод, на вход в который подаётся енум (что-то про дни недели?)
@@ -15,22 +17,34 @@ public class Hw01Enum {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+/*        String day = "";
+        DayOfWeek[] arrayOfWeekDays = DayOfWeek.values();
+        String weekDayLikeString = Arrays.toString(arrayOfWeekDays);
+
+        Boolean isNotValidInput = false;
+        while (!isNotValidInput) {
+            System.out.println("Введите день недели: ");
+            day = scanner.next();
+            try {
+
+                isNotValidInput = weekDayLikeString.contains(day);
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+                System.out.println("Try again");
+            }
+        }
+        hoursLeft(DayOfWeek.valueOf(day));*/   // Пример перевода массива в список и стринг, чтобы было возможно сравнить день и енам дней.
 
         System.out.println("Введите день недели: ");
         String day = scanner.next();
 
-//        if (!day.equals(DayOfWeek.valueOf(day).toString())) {
-//        if (!DayOfWeek.values().equals(day)) {
-//            System.out.println("Введён неверный день!!.");
-//        } else {
-//            hoursLeft(DayOfWeek.valueOf(day));
-//        }
-
-        hoursLeft(DayOfWeek.valueOf(day));
+        hoursLeft(day);
 
     }
 
-    public static void hoursLeft(DayOfWeek dayOfWeek) {
+
+
+   /* public static void hoursLeft(DayOfWeek dayOfWeek) {
         switch (dayOfWeek) {
             case Понедельник: {
                 System.out.println("До конца рабочей недели осталось 40 часов.");
@@ -57,31 +71,55 @@ public class Hw01Enum {
                 System.out.println("Сегодня выходной.");
                 break;
             }
-            default: assert false: "Неизвестный день.";
+            default:
+                assert false : "Неизвестный день.";
 
 //                System.out.println("Введён неправильный день недели.");
 //                break;
 
         }
+    }*/
+
+    public static void hoursLeft(String dayOfWeek) {
+        DayOfWeek2 day = Unknown;
+        if (MONDAY.ru.equals(dayOfWeek) || MONDAY.shortRu.equals(dayOfWeek)) {
+            System.out.println("До конца рабочей недели осталось 40 часов.");
+        } else if (TUESDAY.ru.equals(dayOfWeek) || TUESDAY.shortRu.equals(dayOfWeek)) {
+            System.out.println("До конца рабочей недели осталось 32 часов.");
+        }else if (WEDNESDAY.ru.equals(dayOfWeek) || WEDNESDAY.shortRu.equals(dayOfWeek)) {
+            System.out.println("До конца рабочей недели осталось 24 часов.");
+        }else if (THURSDAY.ru.equals(dayOfWeek) || THURSDAY.shortRu.equals(dayOfWeek)) {
+            System.out.println("До конца рабочей недели осталось 16 часов.");
+        }else if (FRIDAY.ru.equals(dayOfWeek) || FRIDAY.shortRu.equals(dayOfWeek)) {
+            System.out.println("До конца рабочей недели осталось 8 часов.");
+        }else if (SATURDAY.ru.equals(dayOfWeek) || SATURDAY.shortRu.equals(dayOfWeek) ||
+                SUNDAY.shortRu.equals(dayOfWeek) || SUNDAY.shortRu.equals(dayOfWeek)) {
+            System.out.println("Сегодня выходной.");
+        } else {
+            System.out.println("Неправильно введён день.");
+        }
+
     }
 }
 
-enum DayOfWeek {
-    Понедельник, Вторник, Среда, Четверг, Пятница, Суббота, Воскресенье;
-
-}
+//enum DayOfWeek {
+//    Понедельник, Вторник, Среда, Четверг, Пятница, Суббота, Воскресенье;
+//
+//}
 
 enum DayOfWeek2 {
-    Monday("Понедельник", "Пн"),
-    Tuesday("Вторник", "Вт"),
-    Wednesday("Среда", "Ср"),
-    Thursday("Четверг", "Чт"),
-    Friday("Пятница", "Пт"),
-    Saturday("Суббота", "Сб"),
-    Sunday("Воскресенье", "Вс");
+    MONDAY("Понедельник", "Пн"),
+    TUESDAY("Вторник", "Вт"),
+    WEDNESDAY("Среда", "Ср"),
+    THURSDAY("Четверг", "Чт"),
+    FRIDAY("Пятница", "Пт"),
+    SATURDAY("Суббота", "Сб"),
+    SUNDAY("Воскресенье", "Вс"),
 
-    private String ru;
-    private String shortRu;
+    Unknown("ХЗ","ХЗ");
+
+    final String ru;
+    final String shortRu;
 
     DayOfWeek2(String ru, String shortRu) {
         this.ru = ru;
@@ -95,20 +133,4 @@ enum DayOfWeek2 {
     public String getShortRu() {
         return shortRu;
     }
-}
-
-class CheckingDays {
-    DayOfWeek2 dayOfWeek2;
-    String monday = DayOfWeek2.Monday.getRu();
-    String mondayShortRu = DayOfWeek2.Monday.getShortRu();
-
-//    public void checkHoursLeft(DayOfWeek2 dayOfWeek2) {
-//        switch (dayOfWeek2 || dayOfWeek2.getRu() || dayOfWeek2.getShortRu()) {
-//            case Monday:
-//            case DayOfWeek2.Monday.getRu():
-//            case DayOfWeek2.Monday.getShortRu():
-//        }
-//    }
-
-
 }
