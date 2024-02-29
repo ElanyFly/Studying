@@ -16,27 +16,23 @@ MyArrayDataException – с детализацией, в какой именно
         String[][] arrayOne = new String[4][4];
         String[][] arrayTwo = new String[6][7];
         String[][] arrayThree = new String[4][3];
+        String[][] arrayThree3 = new String[4][0];
 
 //        fillArray(arrayOne);
+        fillArray(arrayThree3);
 //        printArray(arrayOne);
 
 //        fillArray(arrayTwo);
 
-        fillArray(arrayThree);
-        printArray(arrayThree);
+//        fillArray(arrayThree);
+//        printArray(arrayThree);
 
     }
 
     public static void fillArray(String[][] arrayInput) {
 //заполнение массива строками 4ч4
-        if (arrayInput.length != 4) {
+        if (arrayInput.length != 4 || arrayInput[0].length != 4) {
             throw new RuntimeException("denied");
-        }
-
-        for (int i = 0; i < 3; i++) {
-            if (arrayInput[i].length != 4) {
-                throw new RuntimeException("denied");
-            }
         }
 
         for (int i = 0; i < 4; i++) {
