@@ -18,19 +18,13 @@ MyArrayDataException – с детализацией, в какой именно
         String[][] arrayThree = new String[4][3];
         String[][] arrayThree3 = new String[4][0];
 
-//        fillArray(arrayOne);
         fillArray(arrayThree3);
-//        printArray(arrayOne);
 
-//        fillArray(arrayTwo);
-
-//        fillArray(arrayThree);
-//        printArray(arrayThree);
 
     }
 
     public static void fillArray(String[][] arrayInput) {
-//заполнение массива строками 4ч4
+
         if (arrayInput.length != 4 || arrayInput[0].length != 4) {
             throw new RuntimeException("denied");
         }
@@ -45,12 +39,10 @@ MyArrayDataException – с детализацией, в какой именно
     }
 
     public static void printArray(String[][] arrayInput) {
-//        for (int i = 0; i <= 4; i++) {
-//            System.out.print(i + "\t");
-//        }
+
         System.out.println();
         for (int i = 0; i < 4; i++) {
-//            System.out.print((i + 1) + "\t");
+
             for (int j = 0; j < 4; j++) {
                 System.out.print(arrayInput[i][j] + "\t");
             }
