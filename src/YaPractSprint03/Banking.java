@@ -24,16 +24,13 @@ class BankAccount {
         this.amount = amount;
     }
 
+    public String getCurrency() {           //ADDED
+        return currency;
+    }
+
     public void setCurrency(String currency) {
         this.currency = currency;
     }
-
-    //валюта трёхсимвольным кодом.
-    // создайте переменную int amount. Доступ к переменной должен быть только из наследников и классов в
-    // текущем пакете
-
-    // создайте переменную String currency. Доступ к переменной должен быть только из наследников
-    // и классов в текущем пакете
 
     public void replenishBalance(int amount) {
         this.amount += amount;
@@ -42,19 +39,16 @@ class BankAccount {
 
     public void withdrawCash(int amount) {
         this.amount -= amount;
-        //снятие наличных
     }
 
 
     public void showBalance() {
-        //показать остаток на счету
 
         System.out.println("На вашем счету осталось " + amount + " " + currency);
     }
 }
 
 class DebitAccount extends BankAccount {
-    /* унаследуйте класс от BankAccount */
     public DebitAccount(int amount, String currency) {
         if (amount >= 0) {
 
@@ -63,8 +57,6 @@ class DebitAccount extends BankAccount {
         } else {
             System.out.println("Баланс дебетового счета не может быть меньше 0");
         }
-        // если amount < 0, вывести сообщение "Баланс дебетового счета не может быть меньше 0"
-        // иначе присвоить переменным amount и currency значения, переданные в конструкторе
     }
 
     @Override
@@ -76,10 +68,6 @@ class DebitAccount extends BankAccount {
         } else {
             System.out.println("У вас недостаточно средств для снятия суммы " + amount + " " + currency);
         }
-        // если на счету достаточно денег
-        // вычесть amount из amount класса
-        // вывести сообщение "Вы сняли {amount} {currency}"
-        // иначе вывести сообщение "У вас недостаточно средств для снятия суммы {amount} {currency}"
     }
 
     @Override
@@ -93,18 +81,20 @@ class DebitAccount extends BankAccount {
 class CreditAccount extends BankAccount {
     private int creditLimit;
 
+    public int getCreditLimit() {       //ADDED
+        return creditLimit;
+    }
+
+    public void setCreditLimit(int creditLimit) {
+        this.creditLimit = creditLimit;
+    }
+
     CreditAccount(int amount, String currency, int creditLimit) {
         setAmount(amount);
         setCurrency(currency);
         this.creditLimit = creditLimit;
     }
 
-//    @Override
-//    public void replenishBalance(int amount) {
-//        int addingMoney = getAmount() + amount;
-//        setAmount(addingMoney);
-//        System.out.println("Счёт пополнен на " + amount + " " + currency);
-//    }
     @Override
     public void withdrawCash(int amount) {
         int realLimit = creditLimit + getAmount();
@@ -112,11 +102,11 @@ class CreditAccount extends BankAccount {
             int takenAmount = getAmount() - amount;
             setAmount(takenAmount);
             System.out.println("Вы сняли " + amount + " " + currency);
-        }
-        else {
+        } else {
             System.out.println("У вас недостаточно средств для снятия суммы " + amount + " " + currency);
         }
     }
+
     @Override
     public void showBalance() {
         if (getAmount() >= 0) {
@@ -127,19 +117,104 @@ class CreditAccount extends BankAccount {
     }
 }
 
-/*9.	При вызове public void withdrawCash(int amount) должна проводиться проверка:
-
-не будет ли превышен кредитный лимит после снятия данной суммы.
-Если кредитный лимит не будет превышен,
-
-то уменьшить значение amount класса BankAccount на размер amount,
-переданной в аргументах и вывести сообщение: "Вы сняли {amount} {currency}".
-
-Если после снятия наличных будет превышен кредитный лимит, вывести сообщение:
-"У вас недостаточно средств для снятия суммы {amount} {currency}".*/
+class Bank {
 
 
-//- Ошибка в результатах работы CreditAccount для метода withdrawCash
-// при недостаточном количестве средств без превышения лимита
+    private int checkCreditLimit(String currency) {
+        int limitChecked;
+        switch (currency) {
+            case "RUB":
+                return limitChecked = 100000;
+            case "USD":
+                return limitChecked = 1250;
+            case "EUR":
+                return limitChecked = 1000;
+            default:
+                return limitChecked = 0;
+        }
+    }
+
+    public BankAccount createNewAccount(String bankAccount, String currency) {
+        switch (bankAccount) {
+            case "debit_account":
+                System.out.println("Ваш дебетовый счёт создан");
+                return new DebitAccount(0, currency);
+            case "credit_account":
+                int limit = checkCreditLimit(currency);
+                System.out.println("Кредитный счёт создан. Ваш лимит по счёту " + limit + " " + currency);
+                return new CreditAccount(0, currency, limit);
+            default:
+                System.out.println("Неверно указан тип создаваемого счёта");
+                return new BankAccount();
+        }
+    }
+
+    public void closeAccount(BankAccount bankAccount) {
+        int amountLeft = bankAccount.getAmount();
+        if (bankAccount instanceof DebitAccount) {   //true false
+            if (amountLeft > 0) {
+                System.out.println("Ваш дебетовый счёт закрыт. " +
+                        "Вы можете получить остаток по вашему счёту в размере " + amountLeft + " "
+                        + bankAccount.getCurrency() +
+                        " в отделении банка");
+            } else {
+                System.out.println("Ваш дебетовый счёт закрыт");
+            }
+        } else if (bankAccount instanceof CreditAccount) {
+            if (amountLeft > 0) {
+                System.out.println("Ваш кредитный счёт закрыт. Вы можете получить остаток по вашему счёту " +
+                        "в размере " + amountLeft + " " +
+                        bankAccount.getCurrency() + " в отделении банка");
+            } else if (amountLeft < 0) {
+                System.out.println("Вы не можете закрыть кредитный счёт, потому что на нём есть задолженность. " +
+                        "Задолженность по счёту составляет " + amountLeft + " " +
+                        bankAccount.getCurrency());
+            } else {
+                System.out.println("Ваш кредитный счёт закрыт");
+            }
+
+        } else {
+            System.out.println("Пока что мы не можем закрыть данный вид счёта");
+        }
+
+    }
+    // создать метод createNewAccount, который принимает на вход строку с типом аккаунта
+    // и строку с создаваемой валютой
+
+
+    // если тип "debit_account"
+    // вывести сообщение "Ваш дебетовый счет создан"
+    // создать дебетовый аккаунт в выбранной валюте и с нулевым балансом
+
+
+    // если тип "credit_account"
+    // посчитать кредитный лимит в зависимости от валюты
+    // вывести сообщение "Кредитный счет создан. Ваш лимит по счету {limit} {currency}"
+    // создать кредитный аккаунт в выборанной валюты и с посчитанным кредитным лимитом
+
+    // иначе
+    // вывести сообщение "Неверно указа тип создаваемого счета"
+    // создать пустой объект BankAccount()
+
+    // создать метод closeAccount, который принимает на вход переменную типа BankAccount
+    // если переданный аккаунт дебетовый
+    // если на счету нет денег вывести сообщение "Ваш дебетовый счет закрыт"
+    // иначе вывести сообщение "Ваш дебетовый счет закрыт. Вы можете получить остаток по вашему счету
+    // в размере {amount} {currency} в отделении банка"
+
+
+    // если переданный аккаунт кредитный
+    // если на счету нет денег вывести сообщение "Ваш кредитный счет закрыт"
+
+    // если на счету положительный баланс вывести сообщение "Ваш кредитный счет закрыт.
+    // Вы можете получить остаток по вашему счету в размере {amount} {currency} в отделении банка"
+    // если на счету отрицательный баланс вывести сообщение
+    // "Вы не можете закрыть кредитный счет потому как на нем еще есть задолженность.
+    // Ваша задолженность по счету составляет {amount} {currency}"
+
+    // иначе вывести сообщение "Пока что мы не можем закрыть данный вид счета"
+}
+
+
 
 
