@@ -1,8 +1,15 @@
 package YaPractSprint03;
 
 public class Banking {
+    public static void main(String[] args) {
+        CreditAccount creditAccount = new CreditAccount(10, "USD", 10);
+        creditAccount.withdrawCash(10);
+        creditAccount.withdrawCash(10);
+        creditAccount.withdrawCash(10);
 
+    }
 }
+
 
 class BankAccount {
 
@@ -30,8 +37,6 @@ class BankAccount {
 
     public void replenishBalance(int amount) {
         this.amount += amount;
-        System.out.println("Счёт пополнен на " + amount + " " + currency);
-        // реализуйте метод. Он общий для всех наследников
     }
 
 
@@ -43,8 +48,7 @@ class BankAccount {
 
     public void showBalance() {
         //показать остаток на счету
-//        Для метода public void showBalance() вывести сообщение:
-//        "На вашем счету осталось {amount} {currency}".
+
         System.out.println("На вашем счету осталось " + amount + " " + currency);
     }
 }
@@ -53,6 +57,7 @@ class DebitAccount extends BankAccount {
     /* унаследуйте класс от BankAccount */
     public DebitAccount(int amount, String currency) {
         if (amount >= 0) {
+
             setAmount(amount);
             setCurrency(currency);
         } else {
@@ -102,8 +107,9 @@ class CreditAccount extends BankAccount {
 //    }
     @Override
     public void withdrawCash(int amount) {
-        int takenAmount = getAmount() - amount;
-        if (creditLimit >= takenAmount) {
+        int realLimit = creditLimit + getAmount();
+        if (realLimit >= amount) {
+            int takenAmount = getAmount() - amount;
             setAmount(takenAmount);
             System.out.println("Вы сняли " + amount + " " + currency);
         }
