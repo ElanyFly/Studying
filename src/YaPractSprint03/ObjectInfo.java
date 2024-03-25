@@ -1,3 +1,4 @@
+/*
 package YaPractSprint03;
 
 import java.util.Objects;
@@ -49,3 +50,4 @@ class Person {
     }
 }
 
+*/
