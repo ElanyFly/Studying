@@ -1,4 +1,4 @@
-package YaPractSprint03;
+package YaPractSprint03.Interfaces;
 
 public class InterfaceSmartHome {
 
